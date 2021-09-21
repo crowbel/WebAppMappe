@@ -35,9 +35,9 @@ namespace WebAppMappeProsjekt.Model
         {
             Database.EnsureCreated();
         }
-        public DbSet<Rute> Ruter { get; set; }
-        public DbSet<Avganger> AvgangerTable { get; set; }
-        public DbSet<Destinasjon> Destinasjoner { get; set; }
+        public DbSet<Ruter> Ruter { get; set; }
+        public DbSet<AvgangerTable> Avganger { get; set; }
+        public DbSet<Destinasjoner> Destinasjoner { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
