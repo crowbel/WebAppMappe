@@ -8,10 +8,13 @@ namespace WebAppMappeProsjekt.Model
 {
     public class Ordrer
     {
-
-        //TODO fyll inn lokale variabler
+        public int Id { get; set; }
+        public int antallBarn { get; set; }
+        public int antallVoksne { get; set; }
+        public string refPerson { get; set; }
+        
         virtual public AvgangerTable Avgang { get; set; }
-        virtual public Ruter Rute { get; set; }
+        virtual public Ruter RuteNr { get; set; }
     }
     public class OrdreContext : DbContext
     {
