@@ -36,6 +36,7 @@ namespace WebAppMappeProsjekt
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                DBInit.Initialize(app);
             }
             
 
