@@ -36,7 +36,7 @@ namespace WebAppMappeProsjekt.Model
             Database.EnsureCreated();
         }
         public DbSet<Rute> Ruter { get; set; }
-        public DbSet<Avganger> AvgangerDb { get; set; }
+        public DbSet<Avganger> AvgangerTable { get; set; }
         public DbSet<Destinasjon> Destinasjoner { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
