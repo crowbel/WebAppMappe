@@ -9,17 +9,24 @@ namespace WebAppMappeProsjekt.Model
 {
     public class Ruter
     {
+        public int Id { get; set; }
 
         virtual public Destinasjoner FraDestinasjon { get; set; }
         virtual public Destinasjoner TilDestinasjon { get; set; }
+        public int PrisBarn { get; set; }
+        public int PrisVoksen { get; set; }
     }
     public class AvgangerTable
     {
+        public int Id { get; set; }
         virtual public Ruter RuteNr { get; set; }
+        public DateTime AvgangTid { get; set; }
     }
     public class Destinasjoner
     {
-
+        public int Id { get; set; }
+        public string Sted { get; set; }
+        public string Land { get; set; }
     }
     public class RuteContext : DbContext
     {
