@@ -24,6 +24,13 @@ namespace WebAppMappeProsjekt.Model
 
                 var avgang1 = new AvgangerTable { RuteNr = rute1, AvgangTid = new DateTime(2021,10,10,19,00,00) };
                 var avgang2 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 11, 10, 18, 30, 00) };
+                /*context.Destinasjoner.Add(dest1);
+                context.Destinasjoner.Add(dest2);
+                context.Ruter.Add(rute1);
+                context.Ruter.Add(rute2);
+                context.AvgangerTable.Add(avgang1);
+                context.AvgangerTable.Add(avgang);*/
+
 
 
                 context.SaveChanges();
