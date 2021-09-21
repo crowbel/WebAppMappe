@@ -11,7 +11,7 @@ namespace WebAppMappeProsjekt.Model
     {
 
         virtual public Destinasjoner FraDestinasjon { get; set; }
-        virtual public Destinasjoner tilDestinasjon { get; set; }
+        virtual public Destinasjoner TilDestinasjon { get; set; }
     }
     public class AvgangerTable
     {
