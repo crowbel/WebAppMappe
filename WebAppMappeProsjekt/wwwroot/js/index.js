@@ -80,4 +80,31 @@ function lagreBestilling() {
 //Funksjon som henter alle bestillinger i databasen
 function hentBestillinger() {
     //Henter alle bestillinger i databasen og viser dem i div id="outputOmråde"
+    $.get("Ordre/HentAlle", function (ordre) {
+        formaterOrdre(ordre);
+    })
+    .fail(function () {
+        $("#feil").html("Feil på server - prøv igjen senere");
+    });
+}
+
+function formaterOrdre(ordre) {
+    let ut = "<table class='table table-striped'>" +
+        "<tr>" +
+        "<th>Antall Voksne</th><th>Antall Barn</th><th>RefPerson</th><th>Avgang</th><th>Rute Nr</th>" +
+        "</tr>";
+
+    for (let order of ordre) {
+        ut += "<tr>" +
+            "<td>" + order.antallVoksne + "</td>" +
+            "<td>" + order.antallBarn + "</td>" +
+            "<td>" + order.refPerson + "</td>" +
+            "<td>" + order.avgang + "</td>" +
+            "<td>" + order.ruteNr + "</td>" +
+            "</tr>";
+    }
+
+    ut += "</table>"
+    $("outputOmråde").html(ut);
+        
 }
