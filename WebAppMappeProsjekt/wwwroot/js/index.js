@@ -1,14 +1,17 @@
 ﻿$(function () {
 
     hentAlleDestinasjoner();
+    hentAlleRuter();
 
 });
+
 function hentAlleDestinasjoner() {
     let url = "rute/hentAlleDestinasjoner";
     $.get(url, function (destinasjoner) {
         visDestinasjoner(destinasjoner);
     });
 }
+
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
     for (let dest of destinasjoner) {
@@ -22,23 +25,23 @@ function visDestinasjoner(destinasjoner) {
 
 function hentAlleRuter() {
     let url = "rute/hentAlleRuter";
-    $.get(url, function (rutene) {
-        visRuter(rutene);
+    $.get(url, function (alleRuter) {
+        visRuter(alleRuter);
     });
+
+
 }
 
-function visRuter(rutene) {
-    let ut = ""
+function visRuter(alleRuter) {
+    let ut = "<output>"
 
-    if()
-
-    for (let destRute of rutene) {
+    for (let destRute of alleRuter) {
 
 
-        ut += rutene.
-    }
+        ut += "ID = " + destRute.id + "  FraDestinasjon = " + destRute.fradestinasjon + "</output>";
+        }
 
-    $("")
+    $("#ruteOutPut").html(ut)
 }
 
 
