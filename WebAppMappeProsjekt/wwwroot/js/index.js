@@ -68,11 +68,23 @@ function bestillingsVindu() {
 //Funksjon som prosseserer valgene fra bestillingsvinduet og lagrer dem til databasen.
 function lagreBestilling() {
 
+
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
     //Tar informasjon ifra bestillingsvinduet og lagrer dette til bestillingsdatabasen.
+    const ordre = {
+        antallBarn: $("#antallBarn"),
+        antallVoksne: $("#antallVoksne"),
+        refPerson: $("#refPerson"),
+        avgang: $("#avgang"),
+        ruteNr: $("#ruteNr")
+    }
 
     //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
+    const url = "Ordre/LagreOrdre";
+    $.post(url, ordre, function () {
+        hentBestillinger();
+    });
 
 }
 
