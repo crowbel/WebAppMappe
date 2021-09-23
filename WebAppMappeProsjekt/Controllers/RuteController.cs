@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,22 @@ namespace WebAppMappeProsjekt.Controllers
         {
             _db = db;
         }
-        public async Task<List<Destinasjoner>> HentAlleDestinasjoner()
+        public async Task<List<Destinasjon>> HentAlleDestinasjoner()
         {
+            try
+            {
+                List<Destinasjon> destinasjoner = await _db.Destinasjoner.Select(d => new Destinasjon
+                {
+                    Id = d.Id,
+                    Sted = d.Sted,
+                    Land = d.Land
+                }).ToListAsync();
+                return destinasjoner;
 
+            }catch(Exception e)
+            {
+                return null;
+            }
         }
 
         //Metode for HentAlleRuter følger her.
