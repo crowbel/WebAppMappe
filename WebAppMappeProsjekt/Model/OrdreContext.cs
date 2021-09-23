@@ -14,6 +14,7 @@ namespace WebAppMappeProsjekt.Model
         public string refPerson { get; set; }
         
         virtual public AvgangerTable Avgang { get; set; }
+        
         virtual public Ruter RuteNr { get; set; }
     }
     public class OrdreContext : DbContext
