@@ -13,10 +13,11 @@ namespace WebAppMappeProsjekt.Controllers
     {
         private readonly RuteContext _db;
 
-        public RuteController(RuteContext db) 
+        public RuteController(RuteContext db)
         {
             _db = db;
         }
+
         public async Task<List<Destinasjon>> HentAlleDestinasjoner()
         {
             try
@@ -29,7 +30,8 @@ namespace WebAppMappeProsjekt.Controllers
                 }).ToListAsync();
                 return destinasjoner;
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return null;
             }
@@ -58,6 +60,7 @@ namespace WebAppMappeProsjekt.Controllers
             {
                 return null;
             }
-        } 
+         
+    }*/
     }
 }
