@@ -11,9 +11,9 @@ namespace WebAppMappeProsjekt.Controllers
     [Route("[controller]/[action]")]
     public class RuteController : ControllerBase
     {
-        private readonly RuteContext _db; // RuteContext ikke merget inn enda.
+        private readonly RuteContext _db;
 
-        public RuteController(RuteContext db) //RuteContext ikke merget inn enda.
+        public RuteController(RuteContext db) 
         {
             _db = db;
         }
@@ -43,10 +43,10 @@ namespace WebAppMappeProsjekt.Controllers
         {
             try
             {
-                List<Rute> alleRuter = await _db.Ruter.Select(k => new Rute
+                List<Ruter> alleRuter = await _db.Ruter.Select(r => new Ruter
                 {
                     Id = r.Id,
-                    FraDestinasjon = r.FraDestinajon,
+                    FraDestinasjon = r.FraDestinasjon,
                     TilDestinasjon = r.TilDestinasjon,
                     PrisBarn = r.PrisBarn,
                     PrisVoksen = r.PrisVoksen
@@ -58,8 +58,6 @@ namespace WebAppMappeProsjekt.Controllers
             {
                 return null;
             }
-        }
-    
-         */ 
+        } 
     }
 }
