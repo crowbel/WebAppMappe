@@ -12,10 +12,11 @@ function hentAlleDestinasjoner() {
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
     for (let dest of destinasjoner) {
-        ut += "<option value=" + dest.Id + ">" + dest.Sted + "</option>";
+        ut += "<option value=" + dest.id + ">" + dest.sted + "</option>";
     }
     $("#ruteVelger").html(ut);
 }
+
 //Funksjon som fremviser fra/til rutevelger 
 function ruteVelger() {
 
