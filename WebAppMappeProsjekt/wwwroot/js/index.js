@@ -15,7 +15,7 @@ function hentAlleDestinasjoner() {
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
     for (let dest of destinasjoner) {
-        ut += "<option value=" + dest.id + ">" + dest.sted + "</option>";
+        ut += "<option value=" + dest.id + "onclick(hentRuterfra(dest.sted)>" + dest.sted + "</option>";
     }
 
     $("#ruteVelger").html(ut);
@@ -28,17 +28,33 @@ function hentAlleRuter() {
     $.get(url, function (alleRuter) {
         visRuter(alleRuter);
     });
+}
 
+function hentRuterFra(dest.sted) {
+
+    //Henter dest.id ved onclick i visDestinasjoner.
+
+    let url = "rute/hentSortert";
+
+    $.get(url, function (sortertRute) {
+        visRuter(sortertRute);
+    })
 
 }
 
 function visRuter(alleRuter) {
-    let ut = "<output>"
+    let ut = "<div>"
+
+    let hentId = dest.id;
+        
+    $.get("#ruteVelger")
 
     for (let destRute of alleRuter) {
+        // Hvis destinasjons dest.sted = tilDestinasjon.
 
+        ut += "ID = " + destRute.id + "  FraDestinasjon = " + destRute.fraDestinasjon.sted +
+            "TilDestinasjon = " + destRute.tilDestinasjon.sted + "</div>";
 
-        ut += "ID = " + destRute.id + "  FraDestinasjon = " + destRute.fradestinasjon + "</output>";
         }
 
     $("#ruteOutPut").html(ut)

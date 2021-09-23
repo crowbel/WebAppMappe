@@ -61,5 +61,25 @@ namespace WebAppMappeProsjekt.Controllers
                 return null;
             }
         }
+
+
+        public async Task<List<Rute>> HentSortert()
+        {
+
+           // List<Rute> sortertRute = await _db.Ruter //Finder matchende
+
+            //Skal sortere frem ruter som korresponderer med FreDestinasjon lik valg som hentes ifra
+            // visDestinasjoner via en hentRuterFra() i index.js.
+            try
+            {
+               // List<Rute> alleRuter = await _db.Ruter
+                return null;
+            }
+            catch
+            {
+                return null;
+                //return sortertRute;
+            }
+        }
     }
 }
