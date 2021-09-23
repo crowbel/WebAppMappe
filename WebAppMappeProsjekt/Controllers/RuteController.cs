@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMappeProsjekt.Model;
+using WebAppMappeProsjekt.Models;
 
 namespace WebAppMappeProsjekt.Controllers
 {
@@ -39,13 +40,12 @@ namespace WebAppMappeProsjekt.Controllers
 
         //Metode for HentAlleRuter følger her.
 
-        /*
-         
+
         public async Task<List<Rute>> HentAlleRuter()
         {
             try
             {
-                List<Ruter> alleRuter = await _db.Ruter.Select(r => new Ruter
+                List<Rute> alleRuter = await _db.Ruter.Select(r => new Rute
                 {
                     Id = r.Id,
                     FraDestinasjon = r.FraDestinasjon,
@@ -53,14 +53,13 @@ namespace WebAppMappeProsjekt.Controllers
                     PrisBarn = r.PrisBarn,
                     PrisVoksen = r.PrisVoksen
                 }).ToListAsync();
-                
+
                 return alleRuter;
             }
             catch
             {
                 return null;
             }
-         
-    }*/
+        }
     }
 }
