@@ -14,8 +14,34 @@ function visDestinasjoner(destinasjoner) {
     for (let dest of destinasjoner) {
         ut += "<option value=" + dest.id + ">" + dest.sted + "</option>";
     }
+
     $("#ruteVelger").html(ut);
 }
+
+
+
+function hentAlleRuter() {
+    let url = "rute/hentAlleRuter";
+    $.get(url, function (rutene) {
+        visRuter(rutene);
+    });
+}
+
+function visRuter(rutene) {
+    let ut = ""
+
+    if()
+
+    for (let destRute of rutene) {
+
+
+        ut += rutene.
+    }
+
+    $("")
+}
+
+
 
 //Funksjon som fremviser fra/til rutevelger 
 function ruteVelger() {
