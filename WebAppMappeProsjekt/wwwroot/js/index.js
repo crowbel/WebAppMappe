@@ -1,10 +1,21 @@
 ﻿$(function () {
 
-    // Kall på funksjon som danner hovedutseende til bestillingsløsningen.
+    hentAlleDestinasjoner();
 
 });
-
-
+function hentAlleDestinasjoner() {
+    let url = "rute/hentAlleDestinasjoner";
+    $.get(url, function (destinasjoner) {
+        visDestinasjoner(destinasjoner);
+    });
+}
+function visDestinasjoner(destinasjoner) {
+    let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
+    for (let dest of destinasjoner) {
+        ut += "<option value=" + dest.Id + ">" + dest.Sted + "</option>";
+    }
+    $("#ruteVelger").html(ut);
+}
 //Funksjon som fremviser fra/til rutevelger 
 function ruteVelger() {
 

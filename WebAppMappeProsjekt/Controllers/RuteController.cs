@@ -3,20 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppMappeProsjekt.Model;
 
 namespace WebAppMappeProsjekt.Controllers
 {
     [Route("[controller]/[action]")]
     public class RuteController : ControllerBase
     {
-        //private readonly RuteContext _db; // RuteContext ikke merget inn enda.
+        private readonly RuteContext _db; // RuteContext ikke merget inn enda.
 
-        /*public RuteController(RuteContext db) //RuteContext ikke merget inn enda.
+        public RuteController(RuteContext db) //RuteContext ikke merget inn enda.
         {
             _db = db;
         }
-        */
+        public async Task<List<Destinasjoner>> HentAlleDestinasjoner()
+        {
 
+        }
 
         //Metode for HentAlleRuter følger her.
 
