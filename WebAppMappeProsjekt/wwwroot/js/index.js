@@ -117,6 +117,5 @@ function formaterOrdre(ordre) {
     }
 
     ut += "</table>"
-    $("outputOmråde").html(ut);
-        
+    $("#outputOmråde").html(ut);   
 }
