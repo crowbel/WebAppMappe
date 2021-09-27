@@ -1,8 +1,6 @@
 ﻿$(function () {
 
     hentAlleDestinasjoner();
-    hentAlleRuter();
-
 });
 
 function hentAlleDestinasjoner() {
@@ -15,14 +13,14 @@ function hentAlleDestinasjoner() {
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
     for (let dest of destinasjoner) {
-        ut += "<option value=" + dest.id + "onclick(hentRuterfra(dest.sted)>" + dest.sted + "</option>";
+        ut += "<option value=" + dest.id + "onclick(hentRuterFor(" + dest.id + "))>" + dest.sted + "</option>";
     }
-
+    
     $("#ruteVelger").html(ut);
 }
 
 
-
+//
 function hentAlleRuter() {
     let url = "rute/hentAlleRuter";
     $.get(url, function (alleRuter) {
@@ -30,35 +28,36 @@ function hentAlleRuter() {
     });
 }
 
-function hentRuterFra(dest.sted) {
 
-    //Henter dest.id ved onclick i visDestinasjoner.
-
-    let url = "rute/hentSortert";
-
-    $.get(url, function (sortertRute) {
-        visRuter(sortertRute);
+function hentRuterFor(id) {
+    let url = "rute/hentMatchendeRuter";
+    $.get(url, function (matchendeRuter) {
+        visMatchendeRuter(matchendeRuter);
     })
-
 }
 
-function visRuter(alleRuter) {
+function visMatchendeRuter(matchendeRuter) {
+
     let ut = "<div>"
 
-    let hentId = dest.id;
-        
-    $.get("#ruteVelger")
+    for (let Rute of matchendeRuter) {
 
-    for (let destRute of alleRuter) {
-        // Hvis destinasjons dest.sted = tilDestinasjon.
+        //Test output layout for å sjekke informasjonsflyt
+        ut += "Id = " + Rute.id +
+              "FraDestinasjon = " + Rute.fraDestinasjon.sted +
+            "TilDestinasjon = " + Rute.tilDestinasjon.sted +
+            "PrisBarn = " + Rute.prisBarn +
+            "PrisVoksen = " + Rute.prisVoksen +
+            "</div>";
 
-        ut += "ID = " + destRute.id + "  FraDestinasjon = " + destRute.fraDestinasjon.sted +
-            "TilDestinasjon = " + destRute.tilDestinasjon.sted + "</div>";
-
-        }
-
+    }
     $("#ruteOutPut").html(ut)
 }
+
+
+
+
+
 
 
 

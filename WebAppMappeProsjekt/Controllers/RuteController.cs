@@ -38,9 +38,6 @@ namespace WebAppMappeProsjekt.Controllers
             }
         }
 
-        //Metode for HentAlleRuter følger her.
-
-
         public async Task<List<Rute>> HentAlleRuter()
         {
             try
@@ -62,24 +59,33 @@ namespace WebAppMappeProsjekt.Controllers
             }
         }
 
-
-        public async Task<List<Rute>> HentSortert()
+        /*
+        public async Task<List<Rute>> HentMatchendeRuter(int id)
         {
+            var compareObjekt = await _db.Destinasjoner.FindAsync(id);
 
-           // List<Rute> sortertRute = await _db.Ruter //Finder matchende
-
-            //Skal sortere frem ruter som korresponderer med FreDestinasjon lik valg som hentes ifra
-            // visDestinasjoner via en hentRuterFra() i index.js.
             try
             {
-               // List<Rute> alleRuter = await _db.Ruter
-                return null;
+                List<Rute> matchendeRuter = await _db.Ruter.Select(r => new Rute
+                {
+                    Id = r.Id,
+                    FraDestinasjon = r.FraDestinasjon,
+                    TilDestinasjon = r.TilDestinasjon,
+                    PrisBarn = r.PrisBarn,
+                    PrisVoksen = r.PrisVoksen
+
+                    if (compareObjekt.Sted == r.FraDestinasjon.Sted)
+                }).ToListAsync();
+            
+                return matchendeRuter;
             }
             catch
             {
                 return null;
-                //return sortertRute;
             }
         }
+        
+        */
+
     }
 }
