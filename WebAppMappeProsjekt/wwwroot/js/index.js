@@ -12,9 +12,9 @@ function hentAlleDestinasjoner() {
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon'>"
+    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()'>"
     for (let dest of destinasjoner) {
-        ut += "<option value='"+dest.id+"' onclick='hentRuterFor("+dest.id+")'>" + dest.sted + "</option>";
+        ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
     $("#ruteVelger").html(ut);
 }
@@ -29,7 +29,10 @@ function hentAlleRuter() {
 }
 
 
-function hentRuterFor(id) {
+function hentRuterFor() {
+    
+    let id = $("#selectDestinasjon").find(":selected").val();
+    $("#ruteVelger").html(id);
     let url = "rute/hentMatchendeRuter?id="+id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
