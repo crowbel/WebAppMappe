@@ -59,7 +59,7 @@ namespace WebAppMappeProsjekt.Controllers
             }
         }
 
-        /*
+        
         public async Task<List<Rute>> HentMatchendeRuter(int id)
         {
             var compareObjekt = await _db.Destinasjoner.FindAsync(id);
@@ -73,10 +73,11 @@ namespace WebAppMappeProsjekt.Controllers
                     TilDestinasjon = r.TilDestinasjon,
                     PrisBarn = r.PrisBarn,
                     PrisVoksen = r.PrisVoksen
-
-                    if (compareObjekt.Sted == r.FraDestinasjon.Sted)
+                    
                 }).ToListAsync();
-            
+
+                matchendeRuter.Sort(id, matchendeRuter.Count, null);
+
                 return matchendeRuter;
             }
             catch
@@ -84,8 +85,6 @@ namespace WebAppMappeProsjekt.Controllers
                 return null;
             }
         }
-        
-        */
-
+      
     }
 }
