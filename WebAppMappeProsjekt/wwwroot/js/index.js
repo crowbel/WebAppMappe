@@ -16,12 +16,10 @@ function visDestinasjoner(destinasjoner) {
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
-<<<<<<< Updated upstream
-=======
 
     //ut= "<button class='btn btn-primary' onclick='tilBestilling()'>Videre</button>";
     
->>>>>>> Stashed changes
+
     $("#ruteVelger").html(ut);
    
 }
