@@ -1,7 +1,7 @@
 ﻿$(function () {
 
     hentAlleDestinasjoner();
-    //bestillingsVindu();
+    knapp();
 });
 
 function hentAlleDestinasjoner() {
@@ -12,21 +12,24 @@ function hentAlleDestinasjoner() {
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()'>"
+    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:50px;width:300px;'>" +
+        "<option value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
-
-    //ut= "<button class='btn btn-primary' onclick='tilBestilling()'>Videre</button>";
     
-
     $("#ruteVelger").html(ut);
    
 }
 
-/*function tilBestilling() {
+function knapp() {
+    ut = "<button class='btn btn-default' onclick='tilBestilling()'>Videre</button>";
+    $("#knapp").html(ut);
+}
+
+function tilBestilling() {
     window.location.href = "bestilling.html";
-}*/
+}
 
 
 
@@ -76,7 +79,7 @@ function formaterAvganger(avganger) {
 
 //Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
 
-function bestillingsVindu() {
+/*function bestillingsVindu() {
 
     let ut = "<div class='container' style='width: 50%'>" +
         "<h1>Info</h1>" +
@@ -107,22 +110,15 @@ function bestillingsVindu() {
 
     $("#outputOmråde").html(ut);
 
-    //Lagrer fra og til info midlertidig
-
-    //Endrer html i diven for å fremvise et bestillingsform.
-
-    //Fremviser knapp for å fullføre reservasjon av billett som kaller på lagreBestilling() 
+    
 }
 
 
-//Funksjon som prosseserer valgene fra bestillingsvinduet og lagrer dem til databasen.
 
 function lagreBestilling() {
 
 
-    //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
-
-    //Tar informasjon ifra bestillingsvinduet og lagrer dette til bestillingsdatabasen.
+    
     const order = {
         antallBarn: $("#antallBarn").val(),
         antallVoksen: $("#antallVoksen").val(),
@@ -131,7 +127,7 @@ function lagreBestilling() {
         ruteNr: $("#ruteNr").val()
     }
 
-    //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
+   
     const url = "Ordre/LagreOrdre";
     $.post(url, order, function () {
         hentBestillinger();
@@ -140,9 +136,9 @@ function lagreBestilling() {
 }
 
 
-//Funksjon som henter alle bestillinger i databasen
+
 function hentBestillinger() {
-    //Henter alle bestillinger i databasen og viser dem i div id="outputOmråde"
+    
     $.get("Ordre/HentAlle", function (ordre) {
         formaterOrdre(ordre);
     })
@@ -168,4 +164,4 @@ function formaterOrdre(ordre) {
 
     ut += "</table>";
     $("#outputOmråde").html(ut);
-}
+}*/

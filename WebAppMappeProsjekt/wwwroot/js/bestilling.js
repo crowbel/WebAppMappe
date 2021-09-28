@@ -26,7 +26,7 @@ function bestillingsVindu() {
         "<input type='hidden' id='avgangNr'/>" +
         "<input type='hidden' id='ruteNr'/>" +
         "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn'/>" +
+        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
         "</div>" +
         "</form>" +
         "</div>";
@@ -80,7 +80,7 @@ function hentBestillinger() {
 
 function formaterOrdre(ordre) {
     let ut ="<h1 style='text-align:center'>Bestillingsoversikt</h1>"+
-        "<table class='table table-striped'>" +
+        "<table class='table table-striped' >" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
         "</tr>";
@@ -95,5 +95,6 @@ function formaterOrdre(ordre) {
     }
 
     ut += "</table>";
+    ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
     $("#outputOmråde").html(ut);
 }
