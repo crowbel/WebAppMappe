@@ -73,9 +73,10 @@ namespace WebAppMappeProsjekt.Controllers
                     PrisBarn = r.PrisBarn,
                     PrisVoksen = r.PrisVoksen
                     
-                }).ToListAsync();
+                }).Where(r => r.Id == id)
+                .ToListAsync();
 
-                matchendeRuter.Sort(id, matchendeRuter.Count, null);
+                //matchendeRuter.Sort(id, matchendeRuter.Count, null);
 
                 return matchendeRuter;
             }
