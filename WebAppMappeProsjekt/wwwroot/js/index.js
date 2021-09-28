@@ -15,12 +15,11 @@ function visDestinasjoner(destinasjoner) {
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"' onclick='hentRuterFor("+dest.id+")'>" + dest.sted + "</option>";
     }
-    
     $("#ruteVelger").html(ut);
 }
 
 
-//
+
 function hentAlleRuter() {
     let url = "rute/hentAlleRuter";
     $.get(url, function (alleRuter) {
@@ -30,7 +29,7 @@ function hentAlleRuter() {
 
 
 function hentRuterFor(id) {
-    let url = "rute/hentMatchendeRuter";
+    let url = "rute/hentMatchendeRuter?id="+id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
     })
@@ -54,22 +53,6 @@ function visMatchendeRuter(matchendeRuter) {
     $("#ruteOutPut").html(ut)
 }
 
-
-
-
-
-
-
-
-//Funksjon som fremviser fra/til rutevelger 
-function ruteVelger() {
-
-    //Fremviser 2 dropdown menyer i div med id="outputOmråde"
-
-    //En med FRA destinasjoner og en med TIL destinasjoner
-
-    //Fremviser knapp for å trykke videre til bestillingsVindu()
-}
 
 
 //Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.

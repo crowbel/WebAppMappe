@@ -59,7 +59,6 @@ namespace WebAppMappeProsjekt.Controllers
             }
         }
 
-        
         public async Task<List<Rute>> HentMatchendeRuter(int id)
         {
             var compareObjekt = await _db.Destinasjoner.FindAsync(id);
@@ -85,6 +84,5 @@ namespace WebAppMappeProsjekt.Controllers
                 return null;
             }
         }
-      
     }
 }
