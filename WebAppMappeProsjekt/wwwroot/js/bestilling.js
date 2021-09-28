@@ -1,80 +1,11 @@
 ﻿$(function () {
 
-    hentAlleDestinasjoner();
-    //bestillingsVindu();
+    bestillingsVindu();
 });
-
-function hentAlleDestinasjoner() {
-    let url = "rute/hentAlleDestinasjoner";
-    $.get(url, function (destinasjoner) {
-        visDestinasjoner(destinasjoner);
-    });
-}
-
-function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()'>"
-    for (let dest of destinasjoner) {
-        ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
-    }
-<<<<<<< Updated upstream
-=======
-
-    //ut= "<button class='btn btn-primary' onclick='tilBestilling()'>Videre</button>";
-    
->>>>>>> Stashed changes
-    $("#ruteVelger").html(ut);
-   
-}
-
-/*function tilBestilling() {
-    window.location.href = "bestilling.html";
-}*/
-
-
-
-function hentAlleRuter() {
-    let url = "rute/hentAlleRuter";
-    $.get(url, function (alleRuter) {
-        visRuter(alleRuter);
-    });
-}
-
-
-function hentRuterFor() {
-    
-    let id = $("#selectDestinasjon").find(":selected").val();
-    $("#ruteVelger").html(id);
-    let url = "rute/hentMatchendeRuter?id="+id;
-    $.get(url, function (matchendeRuter) {
-        visMatchendeRuter(matchendeRuter);
-    })
-}
-
-function visMatchendeRuter(matchendeRuter) {
-
-    let ut = "<div>"
-
-    for (let Rute of matchendeRuter) {
-
-        //Test output layout for å sjekke informasjonsflyt
-        ut += "Id = " + Rute.id +
-              "FraDestinasjon = " + Rute.fraDestinasjon.sted +
-            "TilDestinasjon = " + Rute.tilDestinasjon.sted +
-            "PrisBarn = " + Rute.prisBarn +
-            "PrisVoksen = " + Rute.prisVoksen +
-            "</div>";
-
-    }
-    $("#ruteOutPut").html(ut)
-}
-
-
-
-//Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
 
 function bestillingsVindu() {
 
-    let ut = "<div class='container' style='width: 50%'>" +
+    let ut = "<div class='container'>" +
         "<h1>Info</h1>" +
         "<form class='form'>" +
         "<div class='form-group'>" +
@@ -95,7 +26,7 @@ function bestillingsVindu() {
         "<input type='hidden' id='avgangNr'/>" +
         "<input type='hidden' id='ruteNr'/>" +
         "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-primary'/>" +
+        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn'/>" +
         "</div>" +
         "</form>" +
         "</div>";
@@ -148,7 +79,8 @@ function hentBestillinger() {
 }
 
 function formaterOrdre(ordre) {
-    let ut = "<table class='table table-striped'>" +
+    let ut ="<h1 style='text-align:center'>Bestillingsoversikt</h1>"+
+        "<table class='table table-striped'>" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
         "</tr>";
