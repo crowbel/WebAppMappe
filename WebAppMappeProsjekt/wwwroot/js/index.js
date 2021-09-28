@@ -64,8 +64,8 @@ function hentAvganger() {
     
     let id = $("#selectRute").find(":selected").val();
     //DateTime må konverteres til et format c# gjenkjenner
-    let tid = $("#avreiseTid").val();
-    let url = "rute/hentAvganger?ruteid=" + id + "?tid=" + tid
+    let Tid = new Date($("#avreiseTid").val());
+    let url = "rute/hentAvganger?ruteid=" + id + "&tid=" + Tid.toJSON();
     $.get(url, function (avganger) {
         formaterAvganger(avganger);
     });
