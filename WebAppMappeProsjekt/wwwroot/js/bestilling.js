@@ -1,85 +1,11 @@
 ﻿$(function () {
 
-    hentAlleDestinasjoner();
-    //bestillingsVindu();
+    bestillingsVindu();
 });
-
-function hentAlleDestinasjoner() {
-    let url = "rute/hentAlleDestinasjoner";
-    $.get(url, function (destinasjoner) {
-        visDestinasjoner(destinasjoner);
-    });
-}
-
-function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()'>"
-    for (let dest of destinasjoner) {
-        ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
-    }
-
-    //ut= "<button class='btn btn-primary' onclick='tilBestilling()'>Videre</button>";
-    
-
-    $("#ruteVelger").html(ut);
-   
-}
-
-/*function tilBestilling() {
-    window.location.href = "bestilling.html";
-}*/
-
-
-
-function hentAlleRuter() {
-    let url = "rute/hentAlleRuter";
-    $.get(url, function (alleRuter) {
-        visRuter(alleRuter);
-    });
-}
-
-
-function hentRuterFor() {
-    
-    let id = $("#selectDestinasjon").find(":selected").val();
-    let url = "rute/hentMatchendeRuter?id="+id;
-    $.get(url, function (matchendeRuter) {
-        visMatchendeRuter(matchendeRuter);
-    })
-}
-
-function visMatchendeRuter(matchendeRuter) {
-
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option></option>"
-
-    for (let Rute of matchendeRuter) {
-
-        //Test output layout for å sjekke informasjonsflyt
-        ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
-
-    }
-    ut+= "<input type='datetime-local' id='avreiseTid'> <button onclick='hentAvganger()'>Finn reise</button>"
-    $("#ruteOutPut").html(ut)
-}
-function hentAvganger() {
-    
-    let id = $("#selectRute").find(":selected").val();
-    //DateTime må konverteres til et format c# gjenkjenner
-    let tid = $("#avreiseTid").val();
-    let url = "rute/hentAvganger?ruteid=" + id + "?tid=" + tid
-    $.get(url, function (avganger) {
-        formaterAvganger(avganger);
-    });
-    $("#ruteOutput").html(id);
-}
-function formaterAvganger(avganger) {
-
-}
-
-//Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
 
 function bestillingsVindu() {
 
-    let ut = "<div class='container' style='width: 50%'>" +
+    let ut = "<div class='container'>" +
         "<h1>Info</h1>" +
         "<form class='form'>" +
         "<div class='form-group'>" +
@@ -100,7 +26,7 @@ function bestillingsVindu() {
         "<input type='hidden' id='avgangNr'/>" +
         "<input type='hidden' id='ruteNr'/>" +
         "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-primary'/>" +
+        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn'/>" +
         "</div>" +
         "</form>" +
         "</div>";
@@ -153,7 +79,8 @@ function hentBestillinger() {
 }
 
 function formaterOrdre(ordre) {
-    let ut = "<table class='table table-striped'>" +
+    let ut ="<h1 style='text-align:center'>Bestillingsoversikt</h1>"+
+        "<table class='table table-striped'>" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
         "</tr>";
