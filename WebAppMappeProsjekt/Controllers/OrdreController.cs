@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WebAppMappeProsjekt.Model;
 
 namespace WebAppMappeProsjekt.Controllers
@@ -13,9 +14,12 @@ namespace WebAppMappeProsjekt.Controllers
     {
         private readonly OrdreContext _db;
 
-        public OrdreController (OrdreContext db)
+        private ILogger<OrdreController> _log;
+
+        public OrdreController (OrdreContext db, ILogger<OrdreController> log)
         {
             _db = db;
+            _log = log;
         }
 
         public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
