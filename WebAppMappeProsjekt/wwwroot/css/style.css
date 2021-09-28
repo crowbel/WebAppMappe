@@ -19,16 +19,26 @@
 .column .container {
     margin-top: 5%;
     //margin-right: 30%;
-    width:90%;
-  
-    
-    
+    width:90%;  
 }
 
 .column {
     float:left;
     width: 50%;
-    //text-align:center;
-    
-    
+    //text-align:center;   
+}
+
+@media only screen and (max-width: 1015px){
+    .column{
+        width:100%;
+    }
+
+    .column img{
+        height: 500px;
+    }
+}
+
+.btn-default{
+    background: #696969;
+    color: #fff;
 }
