@@ -76,12 +76,29 @@ namespace WebAppMappeProsjekt.Controllers
                 }).Where(r => r.Id == id)
                 .ToListAsync();
 
-                //matchendeRuter.Sort(id, matchendeRuter.Count, null);
-
                 return matchendeRuter;
             }
             catch
             {
+                return null;
+            }
+        }
+        public async Task<List<Avganger>> HentAvganger(int RuteId, DateTime Tid)
+        {
+            try
+            {
+                List<Avganger> avganger = await _db.Avganger.Select(a => new Avganger
+                {
+                    Id = a.Id,
+                    AvgangTid = a.AvgangTid,
+                    RuteNr = a.RuteNr
+                }).Where(a => a.Id == RuteId && a.AvgangTid == Tid)
+                .ToListAsync();
+                return avganger;
+            }
+            catch
+            {
+                //TODO send http error
                 return null;
             }
         }

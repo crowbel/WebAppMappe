@@ -32,7 +32,6 @@ function hentAlleRuter() {
 function hentRuterFor() {
     
     let id = $("#selectDestinasjon").find(":selected").val();
-    $("#ruteVelger").html(id);
     let url = "rute/hentMatchendeRuter?id="+id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
@@ -41,23 +40,31 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<div>"
+    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option></option>"
 
     for (let Rute of matchendeRuter) {
 
         //Test output layout for å sjekke informasjonsflyt
-        ut += "Id = " + Rute.id +
-              "FraDestinasjon = " + Rute.fraDestinasjon.sted +
-            "TilDestinasjon = " + Rute.tilDestinasjon.sted +
-            "PrisBarn = " + Rute.prisBarn +
-            "PrisVoksen = " + Rute.prisVoksen +
-            "</div>";
+        ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
 
     }
+    ut+= "<input type='datetime-local' id='avreiseTid'> <button onclick='hentAvganger()'>Finn reise</button>"
     $("#ruteOutPut").html(ut)
 }
+function hentAvganger() {
+    
+    let id = $("#selectRute").find(":selected").val();
+    //DateTime må konverteres til et format c# gjenkjenner
+    let tid = $("#avreiseTid").val();
+    let url = "rute/hentAvganger?ruteid=" + id + "?tid=" + tid
+    $.get(url, function (avganger) {
+        formaterAvganger(avganger);
+    });
+    $("#ruteOutput").html(id);
+}
+function formaterAvganger(avganger) {
 
-
+}
 
 //Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
 
