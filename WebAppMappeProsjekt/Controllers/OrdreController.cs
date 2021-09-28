@@ -23,17 +23,17 @@ namespace WebAppMappeProsjekt.Controllers
             try
             {
                 var nyOrdre = new Ordrer();
-                nyOrdre.antallBarn = innOrdre.AntallBarn;
-                nyOrdre.antallVoksne = innOrdre.AntallVoksen;
-                nyOrdre.refPerson = innOrdre.RefPers;
-                nyOrdre.Avgang = innOrdre.AvgangNr;
+                nyOrdre.AntallBarn = innOrdre.AntallBarn;
+                nyOrdre.AntallVoksen = innOrdre.AntallVoksen;
+                nyOrdre.RefPers = innOrdre.RefPers;
+                nyOrdre.AvgangNr = innOrdre.AvgangNr;
                 nyOrdre.RuteNr = innOrdre.RuteNr;
 
                 _db.Ordrer.Add(nyOrdre);
                 await _db.SaveChangesAsync();
                 return true;
 
-                
+
             }
             catch
             {
@@ -49,13 +49,13 @@ namespace WebAppMappeProsjekt.Controllers
                 List<BillettOrdre> alleOrdrer = await _db.Ordrer.Select(b => new BillettOrdre
                 {
                     Id = b.Id,
-                    AntallBarn = b.antallBarn,
-                    AntallVoksen= b.antallVoksne,
-                    RefPers = b.refPerson,
-                    AvgangNr = b.Avgang,
+                    AntallBarn = b.AntallBarn,
+                    AntallVoksen = b.AntallVoksen,
+                    RefPers = b.RefPers,
+                    AvgangNr = b.AvgangNr,
                     RuteNr = b.RuteNr
 
-                 
+
                 }).ToListAsync();
 
                 return alleOrdrer;
