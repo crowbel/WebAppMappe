@@ -13,7 +13,7 @@ function hentAlleDestinasjoner() {
 
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:50px;width:300px;'>" +
-        "<option value=''>Velg destinasjon</option>";
+        "<option disabled selected value>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
@@ -52,7 +52,7 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option></option>"
+    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 
