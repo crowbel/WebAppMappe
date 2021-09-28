@@ -9,12 +9,12 @@ namespace WebAppMappeProsjekt.Model
     public class Ordrer
     {
         public int Id { get; set; }
-        public int antallBarn { get; set; }
-        public int antallVoksne { get; set; }
-        public string refPerson { get; set; }
-        
-        virtual public AvgangerTable Avgang { get; set; }
-        
+        public int AntallBarn { get; set; }
+        public int AntallVoksen { get; set; }
+        public string RefPers { get; set; }
+
+        virtual public AvgangerTable AvgangNr { get; set; }
+
         virtual public Ruter RuteNr { get; set; }
     }
     public class OrdreContext : DbContext
