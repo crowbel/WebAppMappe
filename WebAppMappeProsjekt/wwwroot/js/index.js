@@ -58,9 +58,9 @@ function visMatchendeRuter(matchendeRuter) {
 
         //Test output layout for å sjekke informasjonsflyt
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
-
     }
-    ut+= "<input type='datetime-local' id='avreiseTid'> <button onclick='hentAvganger()'>Finn reise</button>"
+    let iDag = new Date().toISOString().substring(0, 16);
+    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "'> <button onclick='hentAvganger()'>Finn reise</button>"
     $("#ruteOutPut").html(ut)
 }
 function hentAvganger() {
