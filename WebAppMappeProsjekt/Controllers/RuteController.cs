@@ -38,30 +38,8 @@ namespace WebAppMappeProsjekt.Controllers
             }
         }
 
-        public async Task<List<Rute>> HentAlleRuter()
-        {
-            try
-            {
-                List<Rute> alleRuter = await _db.Ruter.Select(r => new Rute
-                {
-                    Id = r.Id,
-                    FraDestinasjon = r.FraDestinasjon,
-                    TilDestinasjon = r.TilDestinasjon,
-                    PrisBarn = r.PrisBarn,
-                    PrisVoksen = r.PrisVoksen
-                }).ToListAsync();
-
-                return alleRuter;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public async Task<List<Rute>> HentMatchendeRuter(int id)
         {
-            var compareObjekt = await _db.Destinasjoner.FindAsync(id);
 
             try
             {

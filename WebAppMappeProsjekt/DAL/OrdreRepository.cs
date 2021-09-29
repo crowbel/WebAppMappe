@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,15 +10,12 @@ namespace WebAppMappeProsjekt.DAL
     {
         private readonly OrdreContext _db;
 
-        //private ILogger<OrdreRepository> _log;
 
-        public OrdreRepository(OrdreContext db) //, ILogger<OrdreController> log
+        public OrdreRepository(OrdreContext db)
         {
-
             _db = db;
-            //_log = log;
-
         }
+
         public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
         {
             try
@@ -43,7 +38,6 @@ namespace WebAppMappeProsjekt.DAL
                 return false;
             }
         }
-
 
         public async Task<List<BillettOrdre>> HentAlle()
         {
@@ -69,6 +63,4 @@ namespace WebAppMappeProsjekt.DAL
             }
         }
     }
-}
-
 }

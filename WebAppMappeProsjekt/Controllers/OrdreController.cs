@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using WebAppMappeProsjekt.DAL;
 using WebAppMappeProsjekt.Model;
 
@@ -26,7 +22,7 @@ namespace WebAppMappeProsjekt.Controllers
         }
 
         public async Task<List<BillettOrdre>> HentAlle()
-        {
+        { 
             return await _db.HentAlle();
         }
     } 
