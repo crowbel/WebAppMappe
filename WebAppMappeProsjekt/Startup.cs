@@ -28,6 +28,7 @@ namespace WebAppMappeProsjekt
             services.AddDbContext<OrdreContext>(options => options.UseSqlite("Data source=Ordre.db"));
 
             services.AddScoped<IOrdreRepository, OrdreRepository>();
+            services.AddScoped<IRuteRepository, RuteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
