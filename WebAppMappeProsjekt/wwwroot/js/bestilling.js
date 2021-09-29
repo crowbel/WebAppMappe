@@ -4,10 +4,12 @@
 });
 
 function bestillingsVindu() {
+    const id = window.location.search.substring(1);
 
     let ut = "<div class='container'>" +
         "<h1>Info</h1>" +
         "<form class='form'>" +
+        "<input type='hidden' id='id'"+
         "<div class='form-group'>" +
         "<label>Antall Barn</label></br>" +
         "<input type='number' class='form-control' id='antallBarn'/>" +
@@ -51,6 +53,7 @@ function lagreBestilling() {
 
     //Tar informasjon ifra bestillingsvinduet og lagrer dette til bestillingsdatabasen.
     const order = {
+        id: $("#id").val(),
         antallBarn: $("#antallBarn").val(),
         antallVoksen: $("#antallVoksen").val(),
         refPers: $("#refPers").val(),
@@ -64,6 +67,10 @@ function lagreBestilling() {
         hentBestillinger();
     });
 
+}
+
+function hentEnBestilling() {
+    $.get("Ordre/HentEn", function)
 }
 
 
