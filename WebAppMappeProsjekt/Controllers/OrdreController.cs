@@ -22,7 +22,7 @@ namespace WebAppMappeProsjekt.Controllers
             _log = log;
         }
 
-        public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
+        public async Task<int> LagreOrdre(BillettOrdre innOrdre)
         {
             try
             {
@@ -35,13 +35,11 @@ namespace WebAppMappeProsjekt.Controllers
 
                 _db.Ordrer.Add(nyOrdre);
                 await _db.SaveChangesAsync();
-                return true;
-
-
+                return nyOrdre.Id;
             }
             catch
             {
-                return false;
+                return -1;
             }
         }
 
