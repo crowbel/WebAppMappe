@@ -13,7 +13,7 @@ function hentAlleDestinasjoner() {
 
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:50px;width:300px;'>" +
-        "<option value=''>Velg destinasjon</option>";
+        "<option disabled selected value>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
@@ -52,15 +52,15 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option></option>"
+    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 
         //Test output layout for å sjekke informasjonsflyt
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
-
     }
-    ut+= "<input type='datetime-local' id='avreiseTid'> <button onclick='hentAvganger()'>Finn reise</button>"
+    let iDag = new Date().toISOString().substring(0, 16);
+    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "'> <button onclick='hentAvganger()'>Finn reise</button>"
     $("#ruteOutPut").html(ut)
 }
 function hentAvganger() {
