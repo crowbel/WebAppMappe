@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\bestilling.js" />
-    <Content Remove="wwwroot\bestilling.html" />
-    <Content Remove="wwwroot\resources\båt3.png" />
+    
   </ItemGroup>
 </Project>
