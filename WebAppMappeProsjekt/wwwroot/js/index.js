@@ -12,7 +12,7 @@ function hentAlleDestinasjoner() {
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:50px;width:300px;'>" +
+    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:55px;width:600px;border-radius:5px;text-align:center;background-color:#18306E;color:white;font-weight:bold;border-color:#18306E; font-size:20px;'>" +
         "<option disabled selected value>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
@@ -30,7 +30,6 @@ function knapp() {
 function tilBestilling() {
     window.location.href = "bestilling.html";
 }
-
 
 
 function hentAlleRuter() {
@@ -52,7 +51,7 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option disabled selected value> Velg rute</option>"
+    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()' style='height:70px;width:300px;'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 
@@ -60,7 +59,7 @@ function visMatchendeRuter(matchendeRuter) {
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
     }
     let iDag = new Date().toISOString().substring(0, 16);
-    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "'> <button onclick='hentAvganger()'>Finn reise</button>"
+    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' style='height:70px;width:300px;'> <button onclick='hentAvganger()' style='height:70px;border-radius:5px;'>Finn reise</button>"
     $("#ruteOutPut").html(ut)
 }
 function hentAvganger() {
@@ -77,6 +76,9 @@ function formaterAvganger(avganger) {
 
 }
 
+/*function knapp() {
+    ut = "<a class='btn btn-default href='bestilling.html?id=+' "
+}*/
 //Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
 
 /*function bestillingsVindu() {
