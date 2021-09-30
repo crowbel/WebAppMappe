@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebAppMappeProsjekt.DAL;
 using WebAppMappeProsjekt.Model;
 
@@ -11,9 +12,12 @@ namespace WebAppMappeProsjekt.Controllers
     {
         private readonly IOrdreRepository _db;
 
-        public OrdreController(IOrdreRepository db)
+        private ILogger<OrdreController> _log;
+
+        public OrdreController(IOrdreRepository db, ILogger<OrdreController> log)
         {
             _db = db;
+            _log = log;
         }
 
         public async Task<int> LagreOrdre(BillettOrdre innOrdre)
@@ -22,31 +26,18 @@ namespace WebAppMappeProsjekt.Controllers
         }
 
         public async Task<List<BillettOrdre>> HentAlle()
-        { 
+        {
+            _log.LogInformation("Hallo Loggen!");
             return await _db.HentAlle();
         }
 
-        public async Task<BillettOrdre> HentEn (int id)
-        {
-            try
-            {
-                Ordrer enOrder = await _db.Ordrer.FindAsync(id);
-                var hentetOrder = new BillettOrdre()
-                {
-                    Id = enOrder.Id,
-                    AntallBarn = enOrder.AntallBarn,
-                    AntallVoksen = enOrder.AntallVoksen,
-                    RefPers = enOrder.RefPers,
-                    AvgangNr = enOrder.AvgangNr,
-                    RuteNr = enOrder.RuteNr
-                };
 
-                return hentetOrder;
-            }
-            catch
-            {
-                return null;
-            }
+        public async Task<BillettOrdre> HentEn(int id)
+        {
+            return await _db.HentEn(id);
         }
+
+
+        
     }
 }

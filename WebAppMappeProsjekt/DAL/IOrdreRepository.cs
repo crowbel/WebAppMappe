@@ -8,5 +8,6 @@ namespace WebAppMappeProsjekt.DAL
     {
         Task<bool> LagreOrdre(BillettOrdre innOrdre);
         Task<List<BillettOrdre>> HentAlle();
+        Task<BillettOrdre> HentEn(int id);
     }
 }

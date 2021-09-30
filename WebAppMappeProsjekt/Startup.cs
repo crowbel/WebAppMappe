@@ -37,7 +37,7 @@ namespace WebAppMappeProsjekt
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                loggerFactory.AddFile("Logs/OrderLog.txt");
+                loggerFactory.AddFile("Logs/WebAppLog.txt");
                 DBInit.Initialize(app);
             }
             

@@ -62,5 +62,28 @@ namespace WebAppMappeProsjekt.DAL
                 return null;
             }
         }
+
+        public async Task<BillettOrdre> HentEn (int id)
+        {
+            try
+            {
+                Ordrer enOrder = await _db.Ordrer.FindAsync(id);
+                var hentetOrder = new BillettOrdre()
+                {
+                    Id = enOrder.Id,
+                    AntallBarn = enOrder.AntallBarn,
+                    AntallVoksen = enOrder.AntallVoksen,
+                    RefPers = enOrder.RefPers,
+                    AvgangNr = enOrder.AvgangNr,
+                    RuteNr = enOrder.RuteNr
+                };
+
+                return hentetOrder;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

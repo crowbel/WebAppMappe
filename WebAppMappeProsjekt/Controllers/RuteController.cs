@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,13 +16,18 @@ namespace WebAppMappeProsjekt.Controllers
     public class RuteController : ControllerBase
     {
         private readonly IRuteRepository _db;
-        public RuteController(IRuteRepository db)
+
+        private ILogger<RuteController> _log;
+
+        public RuteController(IRuteRepository db, ILogger<RuteController> log)
         {
             _db = db;
+            _log = log;
         }
 
         public async Task<List<Destinasjon>> HentAlleDestinasjoner()
         {
+            _log.LogInformation("Hallo Loggen ifra RuteController!");
             return await _db.HentAlleDestinasjoner();
         }
 
