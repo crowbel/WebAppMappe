@@ -16,7 +16,7 @@ namespace WebAppMappeProsjekt.Controllers
             _db = db;
         }
 
-        public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
+        public async Task<int> LagreOrdre(BillettOrdre innOrdre)
         {
             return await _db.LagreOrdre(innOrdre);
         }
@@ -25,5 +25,28 @@ namespace WebAppMappeProsjekt.Controllers
         { 
             return await _db.HentAlle();
         }
-    } 
+
+        public async Task<BillettOrdre> HentEn (int id)
+        {
+            try
+            {
+                Ordrer enOrder = await _db.Ordrer.FindAsync(id);
+                var hentetOrder = new BillettOrdre()
+                {
+                    Id = enOrder.Id,
+                    AntallBarn = enOrder.AntallBarn,
+                    AntallVoksen = enOrder.AntallVoksen,
+                    RefPers = enOrder.RefPers,
+                    AvgangNr = enOrder.AvgangNr,
+                    RuteNr = enOrder.RuteNr
+                };
+
+                return hentetOrder;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
 }

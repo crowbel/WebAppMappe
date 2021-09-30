@@ -26,7 +26,7 @@ function bestillingsVindu() {
         "<input type='hidden' id='avgangNr'/>" +
         "<input type='hidden' id='ruteNr'/>" +
         "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn'/>" +
+        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
         "</div>" +
         "</form>" +
         "</div>";
@@ -40,7 +40,6 @@ function bestillingsVindu() {
 
     //Fremviser knapp for å fullføre reservasjon av billett som kaller på lagreBestilling() 
 }
-
 
 //Funksjon som prosseserer valgene fra bestillingsvinduet og lagrer dem til databasen.
 
@@ -60,40 +59,38 @@ function lagreBestilling() {
 
     //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
     const url = "Ordre/LagreOrdre";
-    $.post(url, order, function () {
-        hentBestillinger();
+    $.post(url, order, function (id) {
+        hentBestilling(id);
     });
-
 }
 
+//Metode som henter den nye bestillingen:
 
-//Funksjon som henter alle bestillinger i databasen
-function hentBestillinger() {
-    //Henter alle bestillinger i databasen og viser dem i div id="outputOmråde"
-    $.get("Ordre/HentAlle", function (ordre) {
-        formaterOrdre(ordre);
+function hentBestilling(id) {
+    $.get("Ordre/HentEn?id="+id, function (order) {
+        formaterOrdre(order);
     })
         .fail(function () {
             $("#feil").html("Feil på server - prøv igjen senere");
         });
 }
 
-function formaterOrdre(ordre) {
-    let ut ="<h1 style='text-align:center'>Bestillingsoversikt</h1>"+
-        "<table class='table table-striped'>" +
+function formaterOrdre(order) {
+    let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
+        "<table class='table table-striped' >" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
         "</tr>";
-    for (let order of ordre) {
-        ut += "<tr>" +
-            "<td>" + order.antallBarn + "</td>" +
-            "<td>" + order.antallVoksen + "</td>" +
-            "<td>" + order.refPers + "</td>" +
-            "<td>" + order.avgangNr + "</td>" +
-            "<td>" + order.ruteNr + "</td>" +
-            "</tr>";
-    }
+    
+    ut += "<tr>" +
+        "<td>" + order.antallBarn + "</td>" +
+        "<td>" + order.antallVoksen + "</td>" +
+        "<td>" + order.refPers + "</td>" +
+        "<td>" + order.avgangNr + "</td>" +
+        "<td>" + order.ruteNr + "</td>" +
+        "</tr>";
 
     ut += "</table>";
+    ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
     $("#outputOmråde").html(ut);
 }
