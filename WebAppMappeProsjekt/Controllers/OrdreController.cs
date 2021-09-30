@@ -28,12 +28,14 @@ namespace WebAppMappeProsjekt.Controllers
                 return BadRequest("Ordren ble ikke lagret");
             }
             return Ok("Ordre ble lagret");
+            
         }
 
         public async Task<ActionResult> HentAlle()
         {
             List<BillettOrdre> alleBillettOrdre = await _db.HentAlle();
             return Ok(alleBillettOrdre);
+            
         }
 
         public async Task<ActionResult> HentEn(int id)
