@@ -35,9 +35,16 @@
     color: white;
     background-color: #18306E;
 }
+.container{
+
+}
+.ruteSelectionContainer {
+    width: 40%;
+    margin-left: 30%;
+}
 .selectDestinasjon {
     height: 55px;
-    width: 600px;
+    width: 100%;
     border-radius: 5px;
     text-align: center;
     background-color: #18306E;
@@ -45,10 +52,26 @@
     font-weight: bold;
     border-color: #18306E;
     font-size: 20px;
+    display: block;
+    padding: 0;
+}
+.selectionInlineContainer {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+.selectionInline {
+    display: block;
+    margin: 0;
+    width: 50%;
+}
+.reiseSelect {
+    width: 100%;
+    height: 70px;
 }
 .btn-default {
-    background: #18306E;
-    color: #fff;
+        background: #18306E;
+        color: #fff;
 }
 @media only screen and (max-width: 1015px){
     .column{
