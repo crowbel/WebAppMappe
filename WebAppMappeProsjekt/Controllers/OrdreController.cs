@@ -22,7 +22,7 @@ namespace WebAppMappeProsjekt.Controllers
             _log = log;
         }
 
-        public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
+        public async Task<int> LagreOrdre(BillettOrdre innOrdre)
         {
             try
             {
@@ -35,13 +35,11 @@ namespace WebAppMappeProsjekt.Controllers
 
                 _db.Ordrer.Add(nyOrdre);
                 await _db.SaveChangesAsync();
-                return true;
-
-
+                return nyOrdre.Id;
             }
             catch
             {
-                return false;
+                return -1;
             }
         }
 
@@ -63,6 +61,29 @@ namespace WebAppMappeProsjekt.Controllers
                 }).ToListAsync();
 
                 return alleOrdrer;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<BillettOrdre> HentEn (int id)
+        {
+            try
+            {
+                Ordrer enOrder = await _db.Ordrer.FindAsync(id);
+                var hentetOrder = new BillettOrdre()
+                {
+                    Id = enOrder.Id,
+                    AntallBarn = enOrder.AntallBarn,
+                    AntallVoksen = enOrder.AntallVoksen,
+                    RefPers = enOrder.RefPers,
+                    AvgangNr = enOrder.AvgangNr,
+                    RuteNr = enOrder.RuteNr
+                };
+
+                return hentetOrder;
             }
             catch
             {

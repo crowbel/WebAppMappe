@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMappeProsjekt.Model;
@@ -85,20 +86,44 @@ namespace WebAppMappeProsjekt.Controllers
         }
         public async Task<List<Avganger>> HentAvganger(int RuteId, DateTime Tid)
         {
+
+            Console.WriteLine(Tid.ToString());
             try
             {
+                
                 List<Avganger> avganger = await _db.Avganger.Select(a => new Avganger
                 {
                     Id = a.Id,
                     AvgangTid = a.AvgangTid,
                     RuteNr = a.RuteNr
-                }).Where(a => a.Id == RuteId && a.AvgangTid == Tid)
+                }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid, Tid) > 0)
                 .ToListAsync();
                 return avganger;
             }
             catch
             {
                 //TODO send http error
+                return null;
+            }
+        }
+
+        public async Task<Avganger> HentEnAvgang(int id)
+        {
+            try
+            {
+                AvgangerTable enAvgang = await _db.Avganger.FindAsync(id);
+                var hentetAvgang = new Avganger()
+                {
+                    Id = enAvgang.Id,
+                    AvgangTid = enAvgang.AvgangTid,
+                    RuteNr = enAvgang.RuteNr,
+
+                };
+
+                return hentetAvgang;
+            }
+            catch
+            {
                 return null;
             }
         }

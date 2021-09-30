@@ -1,33 +1,24 @@
 ﻿$(function () {
-
     hentAlleDestinasjoner();
-    //bestillingsVindu();
 });
 
 function hentAlleDestinasjoner() {
     let url = "rute/hentAlleDestinasjoner";
     $.get(url, function (destinasjoner) {
         visDestinasjoner(destinasjoner);
+    }).fail(function () {
+        $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
     });
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()'>"
+    let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()'>" +
+        "<option disabled selected value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
-
-    //ut= "<button class='btn btn-primary' onclick='tilBestilling()'>Videre</button>";
-    
-
-    $("#ruteVelger").html(ut);
-   
+    $("#fraDestinasjonVelger").html(ut); 
 }
-
-/*function tilBestilling() {
-    window.location.href = "bestilling.html";
-}*/
-
 
 
 function hentAlleRuter() {
@@ -35,6 +26,7 @@ function hentAlleRuter() {
     $.get(url, function (alleRuter) {
         visRuter(alleRuter);
     });
+    //Brukes denne?
 }
 
 
@@ -44,129 +36,70 @@ function hentRuterFor() {
     let url = "rute/hentMatchendeRuter?id="+id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
-    })
+    }).fail(function () {
+        $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
+    });
 }
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()'><option></option>"
+    let ut = "<select name='destinasjoner' id='selectRute' class='reiseSelect' onchange='hentAvganger()'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 
         //Test output layout for å sjekke informasjonsflyt
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
-
     }
-    ut+= "<input type='datetime-local' id='avreiseTid'> <button onclick='hentAvganger()'>Finn reise</button>"
-    $("#ruteOutPut").html(ut)
+    ut += "</select><p class='error' id='ruteErrorLabel'></p>"
+    let iDag = new Date().toISOString().substring(0, 16);
+    let datoFelt = "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' style='height:70px;border-radius:5px;'>Finn reise</button>";
+    $("#ruteVelger").html(ut)
+    $("#tidspunktVelger").html(datoFelt);
 }
 function hentAvganger() {
-    
-    let id = $("#selectRute").find(":selected").val();
-    //DateTime må konverteres til et format c# gjenkjenner
-    let tid = $("#avreiseTid").val();
-    let url = "rute/hentAvganger?ruteid=" + id + "?tid=" + tid
-    $.get(url, function (avganger) {
-        formaterAvganger(avganger);
-    });
-    $("#ruteOutput").html(id);
-}
-function formaterAvganger(avganger) {
-
-}
-
-//Funksjon som prosesserer valgene fra/til og går videre til bestillingsvindu.
-
-function bestillingsVindu() {
-
-    let ut = "<div class='container' style='width: 50%'>" +
-        "<h1>Info</h1>" +
-        "<form class='form'>" +
-        "<div class='form-group'>" +
-        "<label>Antall Barn</label></br>" +
-        "<input type='number' class='form-control' id='antallBarn'/>" +
-        "<span id='feilAntallBarn' style='color: red'></span>" +
-        "</div>" +
-        "<div class='form-group'>" +
-        "<label>Antall Voksne</label></br>" +
-        "<input type='number' class='form-control' id='antallVoksen'/>" +
-        "<span id='feilAntallVoksne' style='color: red'></span>" +
-        "</div>" +
-        "<div class='form-group'>" +
-        "<label>Fornavn og Etternavn</label></br>" +
-        "<input type='text' class='form-control' id='refPers'/>" +
-        "<span id='feilRefPerson' style='color: red'></span>" +
-        "</div>" +
-        "<input type='hidden' id='avgangNr'/>" +
-        "<input type='hidden' id='ruteNr'/>" +
-        "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-primary'/>" +
-        "</div>" +
-        "</form>" +
-        "</div>";
-
-
-    $("#outputOmråde").html(ut);
-
-    //Lagrer fra og til info midlertidig
-
-    //Endrer html i diven for å fremvise et bestillingsform.
-
-    //Fremviser knapp for å fullføre reservasjon av billett som kaller på lagreBestilling() 
-}
-
-
-//Funksjon som prosseserer valgene fra bestillingsvinduet og lagrer dem til databasen.
-
-function lagreBestilling() {
-
-
-    //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
-
-    //Tar informasjon ifra bestillingsvinduet og lagrer dette til bestillingsdatabasen.
-    const order = {
-        antallBarn: $("#antallBarn").val(),
-        antallVoksen: $("#antallVoksen").val(),
-        refPers: $("#refPers").val(),
-        avgangNr: $("#avgangNr").val(),
-        ruteNr: $("#ruteNr").val()
-    }
-
-    //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
-    const url = "Ordre/LagreOrdre";
-    $.post(url, order, function () {
-        hentBestillinger();
-    });
-
-}
-
-
-//Funksjon som henter alle bestillinger i databasen
-function hentBestillinger() {
-    //Henter alle bestillinger i databasen og viser dem i div id="outputOmråde"
-    $.get("Ordre/HentAlle", function (ordre) {
-        formaterOrdre(ordre);
-    })
-        .fail(function () {
-            $("#feil").html("Feil på server - prøv igjen senere");
+    if (validerRuteValg()) {
+        let id = $("#selectRute").find(":selected").val();
+        let Tid = new Date($("#avreiseTid").val());
+        let url = "rute/hentAvganger?ruteid=" + id + "&tid=" + Tid.toJSON();
+        $.get(url, function (avganger) {
+            formaterAvganger(avganger);
+        }).fail(function () {
+            $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
         });
+        knapp(id)
+    } 
+}
+function validerRuteValg() {
+    resetErrorLabels();
+    let gyldig = true;
+    let id = $("#selectRute").find(":selected").val();
+    let Tid = new Date($("#avreiseTid").val());
+    if (!id) {
+        $("#ruteErrorLabel").html("Du må velge en rute!");
+    }
+    if (isNaN(Tid)) {
+        $("#datoErrorLabel").html("Du må velge en tid!");
+    }
+    return gyldig;
+}
+function resetErrorLabels(){
+    $("#ruteErrorLabel").html("");
+    $("#datoErrorLabel").html("");
 }
 
-function formaterOrdre(ordre) {
-    let ut = "<table class='table table-striped'>" +
+function formaterAvganger(avganger) {
+    let ut = "<table class= 'table table-striped' style='width: 600px;'" +
         "<tr>" +
-        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
+        "<th>Tid</th><th></th>" +
         "</tr>";
-    for (let order of ordre) {
+    for (let avgang of avganger) {
         ut += "<tr>" +
-            "<td>" + order.antallBarn + "</td>" +
-            "<td>" + order.antallVoksen + "</td>" +
-            "<td>" + order.refPers + "</td>" +
-            "<td>" + order.avgangNr + "</td>" +
-            "<td>" + order.ruteNr + "</td>" +
+            "<td>" + avgang.avgangTid + "</td>" +
+            "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
             "</tr>";
     }
-
     ut += "</table>";
-    $("#outputOmråde").html(ut);
+    $("#ruteOutPut").html(ut);
 }
+
+
