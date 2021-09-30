@@ -20,7 +20,7 @@ namespace WebAppMappeProsjekt.Controllers
             _log = log;
         }
 
-        public async Task<int> LagreOrdre(BillettOrdre innOrdre)
+        public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
         {
             return await _db.LagreOrdre(innOrdre);
         }
