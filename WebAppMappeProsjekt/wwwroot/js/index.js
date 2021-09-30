@@ -12,7 +12,7 @@ function hentAlleDestinasjoner() {
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:55px;width:600px;border-radius:5px;text-align:center;background-color:#18306E;color:white;font-weight:bold;border-color:#18306E; font-size:20px;'>" +
+    let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()'>" +
         "<option disabled selected value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
@@ -55,16 +55,32 @@ function visMatchendeRuter(matchendeRuter) {
     $("#ruteOutPut").html(ut)
 }
 function hentAvganger() {
-    
+    if (validerRuteValg()) {
+        let id = $("#selectRute").find(":selected").val();
+        let Tid = new Date($("#avreiseTid").val());
+        let url = "rute/hentAvganger?ruteid=" + id + "&tid=" + Tid.toJSON();
+        $.get(url, function (avganger) {
+            formaterAvganger(avganger);
+        }).fail(function () {
+            $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
+        });
+        knapp(id)
+    } else {
+        $("#ruteVelgerErrorField").html("Ett eller flere felt er ugyldige!");
+    }
+}
+function validerRuteValg() {
+    let gyldig = true;
     let id = $("#selectRute").find(":selected").val();
     let Tid = new Date($("#avreiseTid").val());
-    let url = "rute/hentAvganger?ruteid=" + id + "&tid=" + Tid.toJSON();
-    $.get(url, function (avganger) {
-        formaterAvganger(avganger);
-    }).fail(function () {
-        $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
-    });
-    knapp(id)
+    if (!id) {
+        //TODO lage egne felt for hver meny
+        $("#ruteVelgerErrorField").html("Du må velge en rute!");
+    }
+    if (isNaN(Tid)) {
+        $("#ruteVelgerErrorField").html("Du må velge en tid!");
+    }
+    return gyldig;
 }
 function formaterAvganger(avganger) {
 

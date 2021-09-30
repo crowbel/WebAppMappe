@@ -35,6 +35,17 @@
     color: white;
     background-color: #18306E;
 }
+.selectDestinasjon {
+    height: 55px;
+    width: 600px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #18306E;
+    color: white;
+    font-weight: bold;
+    border-color: #18306E;
+    font-size: 20px;
+}
 .btn-default {
     background: #18306E;
     color: #fff;
