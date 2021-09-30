@@ -88,11 +88,18 @@ function resetErrorLabels(){
 }
 
 function formaterAvganger(avganger) {
-
+    let ut = "<table class= 'table table-striped' style='width: 600px;'" +
+        "<tr>" +
+        "<th>Tid</th><th></th>" +
+        "</tr>";
+    for (let avgang of avganger) {
+        ut += "<tr>" +
+            "<td>" + avgang.avgangTid + "</td>" +
+            "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
+            "</tr>";
+    }
+    ut += "</table>";
+    $("#ruteOutPut").html(ut);
 }
 
-function knapp(id) {
-    ut = "<a class='btn btn-default' href='bestilling.html?id=" + id + "'>Videre</a>";
-    $("#knapp").html(ut);
-}
 
