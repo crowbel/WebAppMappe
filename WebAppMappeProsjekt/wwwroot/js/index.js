@@ -13,7 +13,7 @@ function hentAlleDestinasjoner() {
 
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' id='selectDestinasjon' onchange='hentRuterFor()' style='height:55px;width:600px;border-radius:5px;text-align:center;background-color:#18306E;color:white;font-weight:bold;border-color:#18306E; font-size:20px;'>" +
-        "<option disabled selected value>Velg destinasjon</option>";
+        "<option disabled selected value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
@@ -64,8 +64,6 @@ function hentAvganger() {
     }).fail(function () {
         $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
     });
-    $("#ruteOutput").html(id);
-
     knapp(id)
 }
 function formaterAvganger(avganger) {

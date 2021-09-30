@@ -27,7 +27,18 @@
     width: 50%;
     //text-align:center;   
 }
-
+.error{
+    color: red;
+    text-align: center;
+}
+.select:invalid {
+    color: white;
+    background-color: #18306E;
+}
+.btn-default {
+    background: #18306E;
+    color: #fff;
+}
 @media only screen and (max-width: 1015px){
     .column{
         width:100%;
@@ -38,10 +49,4 @@
     }
 }
 
-.btn-default {
-    background: #18306E;
-    color: #fff;
-}
-.error{
-    color: red;
-}
+
