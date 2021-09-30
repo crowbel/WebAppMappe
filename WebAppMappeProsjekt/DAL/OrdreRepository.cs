@@ -9,8 +9,6 @@ namespace WebAppMappeProsjekt.DAL
     public class OrdreRepository : IOrdreRepository
     {
         private readonly OrdreContext _db;
-
-
         public OrdreRepository(OrdreContext db)
         {
             _db = db;

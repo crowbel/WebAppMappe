@@ -13,7 +13,6 @@ namespace WebAppMappeProsjekt.Controllers
     public class RuteController : ControllerBase
     {
         private readonly IRuteRepository _db;
-
         private ILogger<RuteController> _log;
 
         public RuteController(IRuteRepository db, ILogger<RuteController> log)
@@ -42,7 +41,6 @@ namespace WebAppMappeProsjekt.Controllers
         public async Task<ActionResult> HentAvganger(int RuteId, DateTime Tid)
         {
             List<Avganger> matchendeAvganger = await _db.HentAvganger(RuteId, Tid);
-            
             if(matchendeAvganger == null)
             {
                 _log.LogInformation("Fant ingen matchende avganger");

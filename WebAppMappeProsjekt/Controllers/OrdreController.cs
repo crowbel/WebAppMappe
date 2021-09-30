@@ -11,7 +11,6 @@ namespace WebAppMappeProsjekt.Controllers
     public class OrdreController : ControllerBase
     {
         private readonly IOrdreRepository _db;
-
         private ILogger<OrdreController> _log;
 
         public OrdreController(IOrdreRepository db, ILogger<OrdreController> log)
@@ -37,12 +36,9 @@ namespace WebAppMappeProsjekt.Controllers
             return Ok(alleBillettOrdre);
         }
 
-
         public async Task<ActionResult> HentEn(int id)
         {
-            BillettOrdre enBillettOrdre = await _db.HentEn(id);
-
-            
+            BillettOrdre enBillettOrdre = await _db.HentEn(id);            
             if (enBillettOrdre == null)
             {
                 _log.LogInformation("Fant ikke orderen");

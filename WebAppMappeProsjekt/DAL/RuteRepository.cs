@@ -11,12 +11,10 @@ namespace WebAppMappeProsjekt.DAL
     public class RuteRepository : IRuteRepository
     {
         private readonly RuteContext _db;
-
         public RuteRepository(RuteContext db)
         {
             _db = db;
         }
-
         public async Task<List<Destinasjon>> HentAlleDestinasjoner()
         {
             try
@@ -28,17 +26,14 @@ namespace WebAppMappeProsjekt.DAL
                     Land = d.Land
                 }).ToListAsync();
                 return destinasjoner;
-
             }
             catch
             {
                 return null;
             }
         }
-
         public async Task<List<Rute>> HentMatchendeRuter(int id)
         {
-
             try
             {
                 List<Rute> matchendeRuter = await _db.Ruter.Select(r => new Rute
