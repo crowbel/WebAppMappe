@@ -12,7 +12,7 @@ function hentAlleDestinasjoner() {
 }
 
 function visDestinasjoner(destinasjoner) {
-    let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()'>" +
+    let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()' style='height:55px;width:600px;border-radius:5px;text-align:center;background-color:#18306E;color:white;font-weight:bold;border-color:#18306E; font-size:20px;'>" +
         "<option disabled selected value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
@@ -43,7 +43,7 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' onchange='hentAvganger()' style='height:70px;width:300px;'><option disabled selected value> Velg rute</option>"
+    let ut = "<select name='destinasjoner' id='selectRute' style='height:70px;width:300px;'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 
@@ -51,7 +51,8 @@ function visMatchendeRuter(matchendeRuter) {
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
     }
     let iDag = new Date().toISOString().substring(0, 16);
-    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' style='height:70px;width:300px;'> <button onclick='hentAvganger()' style='height:70px;border-radius:5px;'>Finn reise</button>"
+    ut += "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' style='height:70px;width:300px;'>";
+    ut += "<button  style ='height:70px;border-radius:5px;' onclick = 'hentAvganger()'>Finn reise</button >";
     $("#ruteOutPut").html(ut)
 }
 function hentAvganger() {
@@ -64,7 +65,6 @@ function hentAvganger() {
         }).fail(function () {
             $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
         });
-        knapp(id)
     } else {
         $("#ruteVelgerErrorField").html("Ett eller flere felt er ugyldige!");
     }
@@ -83,11 +83,18 @@ function validerRuteValg() {
     return gyldig;
 }
 function formaterAvganger(avganger) {
-
+    let ut = "<table class= 'table table-striped' style='width: 600px;'" +
+        "<tr>" +
+        "<th>Tid</th><th></th>" +
+        "</tr>";
+    for (let avgang of avganger) {
+        ut += "<tr>" +
+            "<td>" + avgang.avgangTid + "</td>" +
+            "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
+            "</tr>";
+    }
+    ut += "</table>";
+    $("#ruteOutPut").html(ut);
 }
 
-function knapp(id) {
-    ut = "<a class='btn btn-default' href='bestilling.html?id=" + id + "'>Videre</a>";
-    $("#knapp").html(ut);
-}
 
