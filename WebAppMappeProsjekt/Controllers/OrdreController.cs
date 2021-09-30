@@ -20,24 +20,35 @@ namespace WebAppMappeProsjekt.Controllers
             _log = log;
         }
 
-        public async Task<bool> LagreOrdre(BillettOrdre innOrdre)
+        public async Task<ActionResult> LagreOrdre(BillettOrdre innOrdre)
         {
-            return await _db.LagreOrdre(innOrdre);
+            bool returOk = await _db.LagreOrdre(innOrdre);
+            if (!returOk)
+            {
+                _log.LogInformation("Ordre ble ikke lagret");
+                return BadRequest("Ordren ble ikke lagret");
+            }
+            return Ok("Ordre ble lagret");
         }
 
-        public async Task<List<BillettOrdre>> HentAlle()
+        public async Task<ActionResult> HentAlle()
         {
-            _log.LogInformation("Hallo Loggen!");
-            return await _db.HentAlle();
+            List<BillettOrdre> alleBillettOrdre = await _db.HentAlle();
+            return Ok(alleBillettOrdre);
         }
 
 
-        public async Task<BillettOrdre> HentEn(int id)
+        public async Task<ActionResult> HentEn(int id)
         {
-            return await _db.HentEn(id);
+            BillettOrdre enBillettOrdre = await _db.HentEn(id);
+
+            
+            if (enBillettOrdre == null)
+            {
+                _log.LogInformation("Fant ikke orderen");
+                return NotFound("Fant ikke orderen");
+            }
+            return Ok(enBillettOrdre);
         }
-
-
-        
     }
 }

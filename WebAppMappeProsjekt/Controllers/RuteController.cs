@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using WebAppMappeProsjekt.DAL;
 using WebAppMappeProsjekt.Model;
@@ -25,20 +22,33 @@ namespace WebAppMappeProsjekt.Controllers
             _log = log;
         }
 
-        public async Task<List<Destinasjon>> HentAlleDestinasjoner()
+        public async Task<ActionResult> HentAlleDestinasjoner()
         {
-            _log.LogInformation("Hallo Loggen ifra RuteController!");
-            return await _db.HentAlleDestinasjoner();
+            List<Destinasjon> alleDestinasjoner = await _db.HentAlleDestinasjoner();
+            return Ok(alleDestinasjoner);
         }
 
-        public async Task<List<Rute>> HentMatchendeRuter(int id)
+        public async Task<ActionResult> HentMatchendeRuter(int id)
         {
-            return await _db.HentMatchendeRuter(id);
+            List<Rute> alleMatchendeRuter = await _db.HentMatchendeRuter(id);
+            if(alleMatchendeRuter == null)
+            {
+                _log.LogInformation("Fant ikke noen matchende ruter");
+                return NotFound("Fant ikke noen matchende ruter");
+            }
+            return Ok(alleMatchendeRuter);
         }
 
-        public async Task<List<Avganger>> HentAvganger(int RuteId, DateTime Tid)
+        public async Task<ActionResult> HentAvganger(int RuteId, DateTime Tid)
         {
-            return await _db.HentAvganger(RuteId, Tid);
+            List<Avganger> matchendeAvganger = await _db.HentAvganger(RuteId, Tid);
+            
+            if(matchendeAvganger == null)
+            {
+                _log.LogInformation("Fant ingen matchende avganger");
+                return NotFound("Fant ingen matchende avganger");
+            }
+            return Ok(matchendeAvganger);
         }
     }
 }
