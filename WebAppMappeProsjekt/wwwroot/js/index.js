@@ -6,6 +6,8 @@ function hentAlleDestinasjoner() {
     let url = "rute/hentAlleDestinasjoner";
     $.get(url, function (destinasjoner) {
         visDestinasjoner(destinasjoner);
+    }).fail(function () {
+        $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
     });
 }
 
@@ -15,7 +17,6 @@ function visDestinasjoner(destinasjoner) {
     for (let dest of destinasjoner) {
         ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
     }
-    
     $("#ruteVelger").html(ut); 
 }
 
@@ -25,6 +26,7 @@ function hentAlleRuter() {
     $.get(url, function (alleRuter) {
         visRuter(alleRuter);
     });
+    //Brukes denne?
 }
 
 
@@ -34,7 +36,9 @@ function hentRuterFor() {
     let url = "rute/hentMatchendeRuter?id="+id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
-    })
+    }).fail(function () {
+        $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
+    });
 }
 
 function visMatchendeRuter(matchendeRuter) {
@@ -57,6 +61,8 @@ function hentAvganger() {
     let url = "rute/hentAvganger?ruteid=" + id + "&tid=" + Tid.toJSON();
     $.get(url, function (avganger) {
         formaterAvganger(avganger);
+    }).fail(function () {
+        $("#ruteVelgerErrorField").html("Feil på server! Prøv igjen senere");
     });
     $("#ruteOutput").html(id);
 
