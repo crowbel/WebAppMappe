@@ -16,6 +16,8 @@ function hentAvgang() {
     $.get(url, function (avganger) {
         bestillingsVindu(avganger);
 
+    }).fail(function () {
+        $("#error").html("Feil på server! Prøv igjen senere")
     });
 }
 
@@ -55,8 +57,6 @@ function bestillingsVindu(avganger) {
         "</div>" +
         "</form>" +
         "</div>";
-
-
     $("#outputOmråde").html(ut);
 
     //Lagrer fra og til info midlertidig
@@ -85,6 +85,8 @@ function lagreBestilling() {
         hentBestilling(id)
 
         
+    }).fail(function () {
+        $("#error").html("Feil på server! Prøv igjen senere")
     });
     }
 }
