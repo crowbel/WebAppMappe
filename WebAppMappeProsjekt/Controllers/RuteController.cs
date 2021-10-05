@@ -96,7 +96,7 @@ namespace WebAppMappeProsjekt.Controllers
                     Id = a.Id,
                     AvgangTid = a.AvgangTid,
                     RuteNr = a.RuteNr
-                }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid, Tid) > 0)
+                }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid.Date, Tid.Date) == 0)
                 .ToListAsync();
                 return avganger;
             }
