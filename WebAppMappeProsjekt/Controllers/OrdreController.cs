@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,12 @@ namespace WebAppMappeProsjekt.Controllers
                 nyOrdre.AntallVoksen = innOrdre.AntallVoksen;
                 nyOrdre.RefPers = innOrdre.RefPers;
                 var sjekkAvgang = _db.Avganger.Find(innOrdre.AvgangNr);
+                var sjekkRute = _db.Ruter.Find(innOrdre.RuteNr);
+                Debug.WriteLine("Avgang:" + innOrdre.AvgangNr);
+                Debug.WriteLine("Rute:" + innOrdre.RuteNr);
+
                 nyOrdre.AvgangNr = sjekkAvgang;
-                nyOrdre.RuteNr = innOrdre.RuteNr;
+                nyOrdre.RuteNr = sjekkRute;
 
                 _db.Ordrer.Add(nyOrdre);
                 await _db.SaveChangesAsync();
@@ -55,8 +60,8 @@ namespace WebAppMappeProsjekt.Controllers
                     AntallBarn = b.AntallBarn,
                     AntallVoksen = b.AntallVoksen,
                     RefPers = b.RefPers,
-                    AvgangNr = b.AvgangNr,
-                    RuteNr = b.RuteNr
+                    AvgangNr = b.AvgangNr.Id,
+                    RuteNr = b.RuteNr.Id
 
 
                 }).ToListAsync();
@@ -80,8 +85,8 @@ namespace WebAppMappeProsjekt.Controllers
                     AntallBarn = enOrder.AntallBarn,
                     AntallVoksen = enOrder.AntallVoksen,
                     RefPers = enOrder.RefPers,
-                    AvgangNr = enOrder.AvgangNr,
-                    RuteNr = enOrder.RuteNr
+                    AvgangNr = enOrder.AvgangNr.Id,
+                    RuteNr = enOrder.RuteNr.Id
                 };
 
                 return hentetOrder;

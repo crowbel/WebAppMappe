@@ -79,17 +79,15 @@ function lagreBestilling() {
         avgangNr: $("#avgangNr").val(),
         ruteNr: $("#ruteNr").val()
     }
-
-    //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
-
-    
-
     const url = "Ordre/LagreOrdre";
     $.post(url, order, function (id) {
         hentBestilling(id)
 
         
     });
+}
+function validate() {
+
 }
 
 

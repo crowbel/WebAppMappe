@@ -13,8 +13,8 @@ namespace WebAppMappeProsjekt.Model
         public int AntallBarn { get; set; }
         public int AntallVoksen { get; set; }
         public string RefPers { get; set; }
-        public virtual AvgangerTable AvgangNr { get; set; }
-        public virtual Ruter RuteNr { get; set; }
+        public int AvgangNr { get; set; }
+        public int RuteNr { get; set; }
         
 
     }
