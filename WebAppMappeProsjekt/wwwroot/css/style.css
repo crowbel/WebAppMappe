@@ -38,6 +38,10 @@
 .container{
 
 }
+.img-container {
+    width: 100%;
+    height: 100px;
+}
 .ruteSelectionContainer {
     width: 40%;
     margin-left: 30%;
@@ -70,8 +74,22 @@
     height: 70px;
 }
 .btn-default {
-        background: #18306E;
-        color: #fff;
+    background: #18306E;
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    border: 0px;
+    font-size: 12pt;
+    border-radius: 10px;
+}
+.btn-search {
+    background: #18306E;
+    color: #fff;
+    height: 70px;
+    width: 100%;
+    border: 0px;
+    font-size: 16pt;
+    border-radius: 10px;
 }
 
 @media only screen and (max-width: 1015px) {
