@@ -30,17 +30,18 @@ function bestillingsVindu(avganger) {
         "<form class='form'>" +
         "<div class='form-group'>" +
         "<label>Antall Barn</label></br>" +
-        "<input type='number' class='form-control' id='antallBarn'/>" +
+        "<input type='number' class='form-control' id='antallBarn'onChange='resetErrors()'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Antall Voksne</label></br>" +
-        "<input type='number' class='form-control' id='antallVoksen'/>" +
+        "<label id='antallVoksneErr'></label></br>" +
+        "<input type='number' class='form-control' id='antallVoksen'onChange='resetErrors()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Fornavn og Etternavn</label></br>" +
-        "<input type='text' class='form-control' id='refPers'/>" +
+        "<input type='text' class='form-control' id='refPers'onChange='resetErrors()'/>" +
         "<span id='feilRefPerson' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
@@ -71,7 +72,7 @@ function lagreBestilling() {
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
-    
+    if (validate()) {
     const order = {
         antallBarn: $("#antallBarn").val(),
         antallVoksen: $("#antallVoksen").val(),
@@ -85,9 +86,26 @@ function lagreBestilling() {
 
         
     });
+    }
 }
 function validate() {
-
+    let gyldig = true;
+    let antallBarn = $("#antallBarn").val();
+    let antallVoksne = $("#antallVoksen").val();
+    let totalAntall = antallBarn + antallVoksne;
+    if (totalAntall < 1) {
+        gyldig = false;
+        $("#feilAntallVoksne").html("Billetten må gjelde minst 1 person!");
+    }
+    if (!$("#refPers").val()) {
+        gyldig = false;
+        $("#feilRefPerson").html("Du må oppgi et navn!");
+    }
+    return gyldig;
+}
+function resetErrors() {
+    $("#feilRefPerson").html("");
+    $("#feilAntallVoksne").html("");
 }
 
 
