@@ -6,29 +6,51 @@
     position: relative;
     text-align: center;
     color: black;
+    
 }
 
 .text-block {
     position: absolute;
-    top: 30%;
+    top: 72%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #777;
     color: white;
-}
-
-
-
-.tekstbokser {
-    position: absolute;
-    top: 2000px;
-    left: 50%;
+    text-shadow: 2px 2px 2px black;
     
-
 }
 
 
-.btn btn-primary {
-    position: absolute;
-    left: 50%;
+.textboxes {
+    position: relative;
+    text-align: center;
+    align-content:center;
+    
 }
+
+
+.textbox1 {
+    width: 350px;
+    float: left;
+    height: 400px;
+    background: #e3f2fd;
+    margin: 40px;
+}
+
+.textbox2 {
+    width: 350px;
+    float: right;
+    height: 400px;
+    background: #e3f2fd;
+    margin: 40px;
+}
+
+
+
+.footer {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    text-align: center;
+}
+
+
