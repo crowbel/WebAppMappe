@@ -31,12 +31,12 @@ function bestillingsVindu(avganger) {
         "<h1>Info</h1>" +
         "<form class='form'>" +
         "<div class='form-group'>" +
-        "<label>Antall Barn</label></br>" +
+        "<label>Antall Barn (" + avganger.ruteNr.prisBarn + " kr)</label></br > " +
         "<input type='number' class='form-control' id='antallBarn'onChange='resetErrors()'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
-        "<label>Antall Voksne</label></br>" +
+        "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
         "<label id='antallVoksneErr'></label></br>" +
         "<input type='number' class='form-control' id='antallVoksen'onChange='resetErrors()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
