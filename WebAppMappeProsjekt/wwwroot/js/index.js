@@ -46,13 +46,11 @@ function visMatchendeRuter(matchendeRuter) {
     let ut = "<select name='destinasjoner' id='selectRute' class='reiseSelect'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
-
-        //Test output layout for å sjekke informasjonsflyt
         ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
     }
     ut += "</select><p class='error' id='ruteErrorLabel'></p>"
     let iDag = new Date().toISOString().substring(0, 16);
-    let datoFelt = "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' style='height:70px;border-radius:5px;'>Finn reise</button>";
+    let datoFelt = "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' class='btn-search'>Finn reise</button>";
     $("#ruteVelger").html(ut)
     $("#tidspunktVelger").html(datoFelt);
 }
