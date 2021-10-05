@@ -12,11 +12,11 @@ namespace WebAppMappeProsjekt.Controllers
     [Route("[controller]/[action]")]
     public class OrdreController : ControllerBase
     {
-        private readonly OrdreContext _db;
+        private readonly RuteContext _db;
 
         private ILogger<OrdreController> _log;
 
-        public OrdreController (OrdreContext db, ILogger<OrdreController> log)
+        public OrdreController (RuteContext db, ILogger<OrdreController> log)
         {
             _db = db;
             _log = log;
@@ -30,7 +30,8 @@ namespace WebAppMappeProsjekt.Controllers
                 nyOrdre.AntallBarn = innOrdre.AntallBarn;
                 nyOrdre.AntallVoksen = innOrdre.AntallVoksen;
                 nyOrdre.RefPers = innOrdre.RefPers;
-                nyOrdre.AvgangNr = innOrdre.AvgangNr;
+                var sjekkAvgang = _db.Avganger.Find(innOrdre.AvgangNr);
+                nyOrdre.AvgangNr = sjekkAvgang;
                 nyOrdre.RuteNr = innOrdre.RuteNr;
 
                 _db.Ordrer.Add(nyOrdre);
