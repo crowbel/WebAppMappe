@@ -11,8 +11,8 @@ namespace WebAppMappeProsjekt.Model
     {
         public int Id { get; set; }
         public DateTime AvgangTid { get; set; }
-        public virtual Ruter RuteNr { get; set; }
-        public virtual List<BillettOrdre> BillettOrdrer { get; set; }
+        public virtual Ruter RuteNr{ get; set; }
+        
 
     }
 

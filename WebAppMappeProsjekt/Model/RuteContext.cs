@@ -15,13 +15,18 @@ namespace WebAppMappeProsjekt.Model
         virtual public Destinasjoner TilDestinasjon { get; set; }
         public int PrisBarn { get; set; }
         public int PrisVoksen { get; set; }
+       
     }
     public class AvgangerTable
     {
         public int Id { get; set; }
-        virtual public Ruter RuteNr { get; set; }
         public DateTime AvgangTid { get; set; }
+        virtual public Ruter RuteNr { get; set; }
+        
+
+
     }
+
     public class Destinasjoner
     {
         public int Id { get; set; }

@@ -1,9 +1,29 @@
 ﻿$(function () {
-
-    bestillingsVindu();
+    /*const id = window.location.search.substring(1);
+    const url = "Rute/HentEnAvgang?" + id;
+    $.get(url, function (avganger) {
+        lagreBestilling(avganger);
+    });
+    bestillingsVindu();*/
+    hentAvgang();
+    
+    
 });
 
-function bestillingsVindu() {
+function hentAvgang() {
+    const id = window.location.search.substring(1);
+    const url = "Rute/HentEnAvgang?"+id;
+    $.get(url, function (avganger) {
+        bestillingsVindu(avganger);
+
+    });
+}
+
+
+
+
+
+function bestillingsVindu(avganger) {
 
     let ut = "<div class='container'>" +
         "<h1>Info</h1>" +
@@ -23,8 +43,12 @@ function bestillingsVindu() {
         "<input type='text' class='form-control' id='refPers'/>" +
         "<span id='feilRefPerson' style='color: red'></span>" +
         "</div>" +
-        "<input type='hidden' id='avgangNr'/>" +
-        "<input type='hidden' id='ruteNr'/>" +
+        "<div class='form-group'>" +
+        "<input type='text' class='form-control' id='avgangNr' value='" + avganger.avgangTid + "'/>" +
+        "</div>"+
+        "<div class='form-group'>" +
+        "<input type='text' id='ruteNr' value='" + avganger.ruteNr.fraDestinasjon.sted + "-" + avganger.ruteNr.tilDestinasjon.sted+ "'/>" +
+        "</div>" +
         "<div class='form-group'>" +
         "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
         "</div>" +
@@ -36,19 +60,18 @@ function bestillingsVindu() {
 
     //Lagrer fra og til info midlertidig
 
-    //Endrer html i diven for å fremvise et bestillingsform.
-
-    //Fremviser knapp for å fullføre reservasjon av billett som kaller på lagreBestilling() 
+    
 }
 
-//Funksjon som prosseserer valgene fra bestillingsvinduet og lagrer dem til databasen.
+
 
 function lagreBestilling() {
-
+    /*console.log(avganger.avgangTid);
+    $("#avgang").html(avganger.avgangTid);*/
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
-    //Tar informasjon ifra bestillingsvinduet og lagrer dette til bestillingsdatabasen.
+    
     const order = {
         antallBarn: $("#antallBarn").val(),
         antallVoksen: $("#antallVoksen").val(),
@@ -58,17 +81,24 @@ function lagreBestilling() {
     }
 
     //Kaller på en Funksjon hentBestillinger() som henter alle bestillinger i databasen.
+
+    
+
     const url = "Ordre/LagreOrdre";
     $.post(url, order, function (id) {
-        hentBestilling(id);
+        hentBestilling(id)
+
+        
     });
 }
 
-//Metode som henter den nye bestillingen:
+
 
 function hentBestilling(id) {
     $.get("Ordre/HentEn?id="+id, function (order) {
-        formaterOrdre(order);
+        //formaterOrdre(order);
+        console.log(order.avgangNr);
+
     })
         .fail(function () {
             $("#feil").html("Feil på server - prøv igjen senere");
@@ -79,7 +109,7 @@ function formaterOrdre(order) {
     let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
         "<table class='table table-striped' >" +
         "<tr>" +
-        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute Nr</th>" +
+        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th>" +
         "</tr>";
     
     ut += "<tr>" +
