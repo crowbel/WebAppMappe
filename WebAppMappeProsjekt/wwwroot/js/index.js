@@ -43,7 +43,7 @@ function hentRuterFor() {
 
 function visMatchendeRuter(matchendeRuter) {
 
-    let ut = "<select name='destinasjoner' id='selectRute' class='reiseSelect' onchange='hentAvganger()'><option disabled selected value> Velg rute</option>"
+    let ut = "<select name='destinasjoner' id='selectRute' class='reiseSelect'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
 

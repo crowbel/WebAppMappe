@@ -44,10 +44,10 @@ function bestillingsVindu(avganger) {
         "<span id='feilRefPerson' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
-        "<input type='text' class='form-control' id='avgangNr' value='" + avganger.avgangTid + "'/>" +
+        "<input type='hidden' class='form-control' id='avgangNr' value='" + avganger.id + "'/>" +
         "</div>"+
         "<div class='form-group'>" +
-        "<input type='text' id='ruteNr' value='" + avganger.ruteNr.fraDestinasjon.sted + "-" + avganger.ruteNr.tilDestinasjon.sted+ "'/>" +
+        "<input type='hidden' id='ruteNr' value='"+avganger.ruteNr.id+"'/>" +  
         "</div>" +
         "<div class='form-group'>" +
         "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
