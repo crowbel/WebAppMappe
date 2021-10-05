@@ -1,0 +1,34 @@
+﻿body {
+    background-color: #F7F3F2;
+}
+
+.bgBilde {
+    position: relative;
+    text-align: center;
+    color: black;
+}
+
+.text-block {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #777;
+    color: white;
+}
+
+
+
+.tekstbokser {
+    position: absolute;
+    top: 2000px;
+    left: 50%;
+    
+
+}
+
+
+.btn btn-primary {
+    position: absolute;
+    left: 50%;
+}
