@@ -67,8 +67,8 @@ function bestillingsVindu(avganger) {
 
 
 function lagreBestilling() {
-    /*console.log(avganger.avgangTid);
-    $("#avgang").html(avganger.avgangTid);*/
+   // console.log(avganger.avgangTid);
+    //$("#avgang").html(avganger.avgangTid);
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
@@ -114,7 +114,7 @@ function resetErrors() {
 
 function hentBestilling(id) {
     $.get("Ordre/HentEn?id="+id, function (order) {
-        //formaterOrdre(order);
+        formaterOrdre(order);
         console.log(order.avgangNr);
 
     })
@@ -124,6 +124,7 @@ function hentBestilling(id) {
 }
 
 function formaterOrdre(order) {
+    
     let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
         "<table class='table table-striped' >" +
         "<tr>" +
@@ -133,12 +134,16 @@ function formaterOrdre(order) {
     ut += "<tr>" +
         "<td>" + order.antallBarn + "</td>" +
         "<td>" + order.antallVoksen + "</td>" +
-        "<td>" + order.refPers + "</td>" +
-        "<td>" + order.avgangNr + "</td>" +
-        "<td>" + order.ruteNr + "</td>" +
-        "</tr>";
+        "<td>" + order.refPers + "</td>";
+        
+    
+    $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
+        ut += "<td>" + avgang.avgangTid + "</td>" +
+            "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>";
+        ut += "</tr ></table>";
+        ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
+        $("#outputOmråde").html(ut);
+    });
 
-    ut += "</table>";
-    ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
-    $("#outputOmråde").html(ut);
+
 }
