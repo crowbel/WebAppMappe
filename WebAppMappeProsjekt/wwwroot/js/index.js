@@ -72,12 +72,20 @@ function validerRuteValg() {
     let gyldig = true;
     let id = $("#selectRute").find(":selected").val();
     let Tid = new Date($("#avreiseTid").val());
+    if (!id && isNaN(Tid)) {
+        $("#ruteErrorLabel").html("Du må velge en rute!");
+        $("#datoErrorLabel").html("Du må velge en tid!");
+        return false;
+    }
     if (!id) {
         $("#ruteErrorLabel").html("Du må velge en rute!");
+        return false;
     }
     if (isNaN(Tid)) {
         $("#datoErrorLabel").html("Du må velge en tid!");
+        return false;
     }
+    
     return gyldig;
 }
 function resetErrorLabels(){
@@ -101,7 +109,7 @@ function formaterAvganger(avganger) {
         $("#ruteOutPut").html(ut);
     }
     else {
-        $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
+        $("#ruteOutPut").html("<p style='margin-top:30px'>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
     }
     
 }

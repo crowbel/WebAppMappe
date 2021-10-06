@@ -15,4 +15,10 @@
     <Folder Include="Logs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Rute.db" />
+    <None Remove="Rute.db" />
+    <None Remove="Rute.db" />
+    <None Remove="Rute.db" />
+  </ItemGroup>
 </Project>
