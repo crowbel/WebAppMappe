@@ -33,7 +33,7 @@ namespace WebAppMappeProsjekt.Model
                 var rute4 = new Ruter { FraDestinasjon = dest4, TilDestinasjon = dest3, PrisBarn = 129, PrisVoksen = 209 };
 
                 var rute5 = new Ruter { FraDestinasjon = dest3, TilDestinasjon = dest2, PrisBarn = 89, PrisVoksen = 169 };
-                var rute6 = new Ruter { FraDestinasjon = dest2, TilDestinasjon = dest4, PrisBarn = 89, PrisVoksen = 169 };
+                var rute6 = new Ruter { FraDestinasjon = dest2, TilDestinasjon = dest3, PrisBarn = 89, PrisVoksen = 169 };
 
                 var avgang4 = new AvgangerTable { RuteNr = rute3, AvgangTid = new DateTime(2021, 10, 20, 19, 00, 00) };
                 var avgang5 = new AvgangerTable { RuteNr = rute4, AvgangTid = new DateTime(2021, 11, 11, 18, 30, 00) };
