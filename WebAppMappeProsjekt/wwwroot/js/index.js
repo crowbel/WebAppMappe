@@ -92,8 +92,9 @@ function formaterAvganger(avganger) {
         "</tr>";
     if (avganger.length != 0) {
         for (let avgang of avganger) {
+            let avreiseTid = new Date(avgang.avgangTid);
             ut += "<tr>" +
-                "<td>" + avgang.avgangTid + "</td>" +
+                "<td>" + avreiseTid.toLocaleString() + "</td>" +
                 "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
                 "</tr>";
         }
