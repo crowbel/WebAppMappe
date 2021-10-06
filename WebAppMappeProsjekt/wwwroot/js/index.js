@@ -72,18 +72,13 @@ function validerRuteValg() {
     let gyldig = true;
     let id = $("#selectRute").find(":selected").val();
     let Tid = new Date($("#avreiseTid").val());
-    if (!id && isNaN(Tid)) {
-        $("#ruteErrorLabel").html("Du må velge en rute!");
-        $("#datoErrorLabel").html("Du må velge en tid!");
-        return false;
-    }
     if (!id) {
         $("#ruteErrorLabel").html("Du må velge en rute!");
-        return false;
+        gyldig = false;
     }
     if (isNaN(Tid)) {
         $("#datoErrorLabel").html("Du må velge en tid!");
-        return false;
+        gyldig = false;
     }
     
     return gyldig;
