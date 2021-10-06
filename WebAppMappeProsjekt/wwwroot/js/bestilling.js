@@ -138,8 +138,9 @@ function formaterOrdre(order) {
         
     
     $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
+        let avreiseTid = new Date(avgang.avgangTid);
         let totalsum = (order.antallBarn * avgang.ruteNr.prisBarn) + (order.antallVoksen * avgang.ruteNr.prisVoksen);
-        ut += "<td>" + avgang.avgangTid + "</td>" +
+        ut += "<td>" + avreiseTid.toLocaleString() + "</td>" +
             "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
             "<td>" + totalsum + " kr</td>";
         ut += "</tr ></table>";
