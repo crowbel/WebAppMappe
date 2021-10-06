@@ -64,7 +64,7 @@ function hentAvganger() {
         }).fail(function () {
             $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
         });
-        knapp(id)
+        
     }
 }
 function validerRuteValg() {
