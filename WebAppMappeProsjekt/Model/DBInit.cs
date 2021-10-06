@@ -23,8 +23,11 @@ namespace WebAppMappeProsjekt.Model
                 var rute2 = new Ruter { FraDestinasjon = dest2, TilDestinasjon = dest1, PrisBarn = 99, PrisVoksen = 199 };
 
                 var avgang1 = new AvgangerTable { RuteNr = rute1, AvgangTid = new DateTime(2021,10,10,19,00,00) };
-                var avgang2 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 11, 10, 18, 30, 00) };
-                var avgang3 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 11, 12, 18, 30, 00) };
+                var avgang2 = new AvgangerTable { RuteNr = rute1, AvgangTid = new DateTime(2021, 10, 12, 19, 00, 00) };
+                var avgang3 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 10, 11, 18, 30, 00) };
+                var avgang4 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 10, 13, 18, 30, 00) };
+                var avgang5 = new AvgangerTable { RuteNr = rute2, AvgangTid = new DateTime(2021, 10, 15, 18, 30, 00) };
+                var avgang6 = new AvgangerTable { RuteNr = rute1, AvgangTid = new DateTime(2021, 10, 14, 19, 00, 00) };
                 context.Destinasjoner.Add(dest1);
                 context.Destinasjoner.Add(dest2);
                 context.Ruter.Add(rute1);
@@ -32,6 +35,9 @@ namespace WebAppMappeProsjekt.Model
                 context.Avganger.Add(avgang1);
                 context.Avganger.Add(avgang2);
                 context.Avganger.Add(avgang3);
+                context.Avganger.Add(avgang4);
+                context.Avganger.Add(avgang5);
+                context.Avganger.Add(avgang6);
 
 
 
