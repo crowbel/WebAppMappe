@@ -2,15 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>ColorLine</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/bestilt.js"></script>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -39,43 +37,19 @@
         </div>
     </nav>
 
-    <div>
-        <img src="/resources/bat1.png" style="width: 100%;top:9%; position:absolute;" />
-    </div>
-
-    <div class="ruteSelectionContainer" id="ruteSelectionContainer" style="position:relative;">
-        <h1>Velg din drømmereise</h1>
-        <p class="error" id="serverErrorLabel"></p>
-        <div id="fraDestinasjonVelger" style="margin-top:45%;">
-
+    <div class="row">
+        <div class="column">
+            <img src="/resources/bat3.png" style="width:100%;" />
         </div>
-        <div class="selectionInlineContainer">
-            <div class="selectionInline" id="ruteVelger">
-            </div>
-            <div class="selectionInline" id="tidspunktVelger">
+
+        <div class="column">
+            <p id="error"></p>
+            <div class="container" id="outputOmråde">
+
             </div>
         </div>
-        <div class=" knapp" id="knapp" style="margin-right:10%;width:100%;"></div>
 
-        <!--<div class="container" id="ruteVelger" style="margin-left: 35%;margin-top:0px;">
-
-            <!--style="margin-left: 28%;position:relative;margin-top:22%;">
-
-        </div>-->
-        <div class="container" id="ruteOutPut" , style="position:relative; margin-top:30px;margin-bottom:10px;">
-
-        </div>
+        <div class="noe" id="avgang" style="margin:10%;"></div>
     </div>
-
-    
-
-
-    <!--<div class="container" id="outputOmråde">
-
-
-
-    </div>-->
-
-
 </body>
 </html>

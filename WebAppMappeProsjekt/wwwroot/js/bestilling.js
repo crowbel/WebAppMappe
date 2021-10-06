@@ -1,13 +1,5 @@
 ﻿$(function () {
-    /*const id = window.location.search.substring(1);
-    const url = "Rute/HentEnAvgang?" + id;
-    $.get(url, function (avganger) {
-        lagreBestilling(avganger);
-    });
-    bestillingsVindu();*/
     hentAvgang();
-
-
 });
 
 function hentAvgang() {
@@ -22,9 +14,6 @@ function hentAvgang() {
 }
 
 
-
-
-
 function bestillingsVindu(avganger) {
 
     let ut = "<div class='container'>" +
@@ -37,7 +26,6 @@ function bestillingsVindu(avganger) {
         "</div>" +
         "<div class='form-group'>" +
         "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
-        "<label id='antallVoksneErr'></label></br>" +
         "<input type='number' class='form-control' id='antallVoksen'onChange='resetErrors()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
         "</div>" +
@@ -60,10 +48,7 @@ function bestillingsVindu(avganger) {
     $("#outputOmråde").html(ut);
 
     //Lagrer fra og til info midlertidig
-
-
 }
-
 
 
 function lagreBestilling() {
@@ -82,8 +67,8 @@ function lagreBestilling() {
         }
         const url = "Ordre/LagreOrdre";
         $.post(url, order, function (id) {
-            hentBestilling(id)
-
+            //hentBestilling(id);
+            window.location.href = 'bestilt.html?id='+ id;
 
         }).fail(function () {
             $("#error").html("Feil på server! Prøv igjen senere")
@@ -95,6 +80,14 @@ function validate() {
     let antallBarn = $("#antallBarn").val();
     let antallVoksne = $("#antallVoksen").val();
     let totalAntall = antallBarn + antallVoksne;
+    if (antallBarn < 1) {
+        gyldig = false;
+        $("#feilAntallBarn").html("Du kan ikke velge et negativt tall!");
+    }
+    if (antallVoksne < 1) {
+        gyldig = false;
+        $("#feilAntallVoksne").html("Du kan ikke velge et negativt tall!");
+    }
     if (totalAntall < 1) {
         gyldig = false;
         $("#feilAntallVoksne").html("Billetten må gjelde minst 1 person!");
@@ -108,12 +101,11 @@ function validate() {
 function resetErrors() {
     $("#feilRefPerson").html("");
     $("#feilAntallVoksne").html("");
+    $("#feilAntallBarn").html("");
 }
 
 
-
-
-function hentBestilling(id) {
+/*function hentBestilling(id) {
     $.get("Ordre/HentEn?id=" + id, function (order) {
         formaterOrdre(order);
         console.log(order.avgangNr);
@@ -150,4 +142,4 @@ function formaterOrdre(order) {
     });
 
 
-}
+}*/
