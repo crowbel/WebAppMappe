@@ -6,13 +6,13 @@
     });
     bestillingsVindu();*/
     hentAvgang();
-    
-    
+
+
 });
 
 function hentAvgang() {
     const id = window.location.search.substring(1);
-    const url = "Rute/HentEnAvgang?"+id;
+    const url = "Rute/HentAvgang?" + id;
     $.get(url, function (avganger) {
         bestillingsVindu(avganger);
 
@@ -48,9 +48,9 @@ function bestillingsVindu(avganger) {
         "</div>" +
         "<div class='form-group'>" +
         "<input type='hidden' class='form-control' id='avgangNr' value='" + avganger.id + "'/>" +
-        "</div>"+
+        "</div>" +
         "<div class='form-group'>" +
-        "<input type='hidden' id='ruteNr' value='"+avganger.ruteNr.id+"'/>" +  
+        "<input type='hidden' id='ruteNr' value='" + avganger.ruteNr.id + "'/>" +
         "</div>" +
         "<div class='form-group'>" +
         "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
@@ -61,33 +61,33 @@ function bestillingsVindu(avganger) {
 
     //Lagrer fra og til info midlertidig
 
-    
+
 }
 
 
 
 function lagreBestilling() {
-   // console.log(avganger.avgangTid);
+    // console.log(avganger.avgangTid);
     //$("#avgang").html(avganger.avgangTid);
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
     if (validate()) {
-    const order = {
-        antallBarn: $("#antallBarn").val(),
-        antallVoksen: $("#antallVoksen").val(),
-        refPers: $("#refPers").val(),
-        avgangNr: $("#avgangNr").val(),
-        ruteNr: $("#ruteNr").val()
-    }
-    const url = "Ordre/LagreOrdre";
-    $.post(url, order, function (id) {
-        hentBestilling(id)
+        const order = {
+            antallBarn: $("#antallBarn").val(),
+            antallVoksen: $("#antallVoksen").val(),
+            refPers: $("#refPers").val(),
+            avgangNr: $("#avgangNr").val(),
+            ruteNr: $("#ruteNr").val()
+        }
+        const url = "Ordre/LagreOrdre";
+        $.post(url, order, function (id) {
+            hentBestilling(id)
 
-        
-    }).fail(function () {
-        $("#error").html("Feil på server! Prøv igjen senere")
-    });
+
+        }).fail(function () {
+            $("#error").html("Feil på server! Prøv igjen senere")
+        });
     }
 }
 function validate() {
@@ -112,8 +112,9 @@ function resetErrors() {
 
 
 
+
 function hentBestilling(id) {
-    $.get("Ordre/HentEn?id="+id, function (order) {
+    $.get("Ordre/HentEn?id=" + id, function (order) {
         formaterOrdre(order);
         console.log(order.avgangNr);
 
@@ -124,22 +125,23 @@ function hentBestilling(id) {
 }
 
 function formaterOrdre(order) {
-    
+
     let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
         "<table class='table table-striped' >" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th><th>Sum</th>" +
         "</tr>";
-    
+
     ut += "<tr>" +
         "<td>" + order.antallBarn + "</td>" +
         "<td>" + order.antallVoksen + "</td>" +
         "<td>" + order.refPers + "</td>";
-        
-    
+
+
     $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
+        let avreiseTid = new Date(avgang.avgangTid);
         let totalsum = (order.antallBarn * avgang.ruteNr.prisBarn) + (order.antallVoksen * avgang.ruteNr.prisVoksen);
-        ut += "<td>" + avgang.avgangTid + "</td>" +
+        ut += "<td>" + avreiseTid.toLocaleString() + "</td>" +
             "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
             "<td>" + totalsum + " kr</td>";
         ut += "</tr ></table>";

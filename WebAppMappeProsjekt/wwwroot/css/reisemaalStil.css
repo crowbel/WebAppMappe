@@ -6,7 +6,6 @@
     position: relative;
     text-align: center;
     color: black;
-    
 }
 
 .text-block {
@@ -16,9 +15,7 @@
     transform: translate(-50%, -50%);
     color: white;
     text-shadow: 2px 2px 2px black;
-    
 }
-
 
 .introtext {
     width: 100%;
@@ -26,8 +23,9 @@
     text-align: center;
     text-shadow: 0px 0px 1px black;
     background-color: #f7f7f7;
+    border-bottom-style: solid;
+    border-bottom-color: black;
 }
-
 
 .textboxes {
     position: relative;
@@ -38,7 +36,6 @@
     left: 50%;
     transform: translateX(-50%);
 }
-
 
 .textbox1 {
     width: 350px;
@@ -58,15 +55,12 @@
     padding: 10px;
 }
 
-
-
 .upbtn {
     position: fixed;
     bottom: 5px;
     left: 5px;
     text-align: center;
 }
-
 
 @media only screen and (max-width: 880px){
 
@@ -76,15 +70,10 @@
         transform: translateX(-50%);
     }
 
-
     .textbox2 {
         position: absolute;
         top: 600px;
         left: 45%;
         transform: translateX(-50%);
     }
-
-
-
-
 }

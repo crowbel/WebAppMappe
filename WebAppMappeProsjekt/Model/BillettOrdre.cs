@@ -15,7 +15,7 @@ namespace WebAppMappeProsjekt.Model
         public string RefPers { get; set; }
         public int AvgangNr { get; set; }
         public int RuteNr { get; set; }
-        
+
 
     }
 
