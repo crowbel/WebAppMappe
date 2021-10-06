@@ -15,9 +15,9 @@ function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()'>" +
         "<option disabled selected value=''>Velg destinasjon</option>";
     for (let dest of destinasjoner) {
-        ut += "<option value='"+dest.id+"'>" + dest.sted + "</option>";
+        ut += "<option value='" + dest.id + "'>" + dest.sted + "</option>";
     }
-    $("#fraDestinasjonVelger").html(ut); 
+    $("#fraDestinasjonVelger").html(ut);
 }
 
 
@@ -31,9 +31,9 @@ function hentAlleRuter() {
 
 
 function hentRuterFor() {
-    
+
     let id = $("#selectDestinasjon").find(":selected").val();
-    let url = "rute/hentMatchendeRuter?id="+id;
+    let url = "rute/hentMatchendeRuter?id=" + id;
     $.get(url, function (matchendeRuter) {
         visMatchendeRuter(matchendeRuter);
     }).fail(function () {
@@ -46,7 +46,7 @@ function visMatchendeRuter(matchendeRuter) {
     let ut = "<select name='destinasjoner' id='selectRute' class='reiseSelect'><option disabled selected value> Velg rute</option>"
 
     for (let Rute of matchendeRuter) {
-        ut += "<option value='" + Rute.id+"'>"+Rute.fraDestinasjon.sted+" til "+Rute.tilDestinasjon.sted +"</option>"
+        ut += "<option value='" + Rute.id + "'>" + Rute.fraDestinasjon.sted + " til " + Rute.tilDestinasjon.sted + "</option>"
     }
     ut += "</select><p class='error' id='ruteErrorLabel'></p>"
     let iDag = new Date().toISOString().substring(0, 16);
@@ -65,7 +65,7 @@ function hentAvganger() {
             $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
         });
         knapp(id)
-    } 
+    }
 }
 function validerRuteValg() {
     resetErrorLabels();
@@ -88,7 +88,7 @@ function validerRuteValg() {
     
     return gyldig;
 }
-function resetErrorLabels(){
+function resetErrorLabels() {
     $("#ruteErrorLabel").html("");
     $("#datoErrorLabel").html("");
 }
@@ -112,7 +112,6 @@ function formaterAvganger(avganger) {
     else {
         $("#ruteOutPut").html("<p style='margin-top:30px'>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
     }
-    
-}
 
+}
 

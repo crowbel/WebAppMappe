@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
+using WebAppMappeProsjekt.DAL;
 using WebAppMappeProsjekt.Model;
 using WebAppMappeProsjekt.Models;
 
@@ -13,136 +12,51 @@ namespace WebAppMappeProsjekt.Controllers
     [Route("[controller]/[action]")]
     public class RuteController : ControllerBase
     {
-        private readonly RuteContext _db;
+        private readonly IRuteRepository _db;
+        private ILogger<RuteController> _log;
 
-        public RuteController(RuteContext db)
+        public RuteController(IRuteRepository db, ILogger<RuteController> log)
         {
             _db = db;
+            _log = log;
         }
 
-        public async Task<List<Destinasjon>> HentAlleDestinasjoner()
+        public async Task<ActionResult> HentAlleDestinasjoner()
         {
-            try
-            {
-                List<Destinasjon> destinasjoner = await _db.Destinasjoner.Select(d => new Destinasjon
-                {
-                    Id = d.Id,
-                    Sted = d.Sted,
-                    Land = d.Land
-                }).ToListAsync();
-                return destinasjoner;
-
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            List<Destinasjon> alleDestinasjoner = await _db.HentAlleDestinasjoner();
+            return Ok(alleDestinasjoner);
         }
 
-        public async Task<List<Rute>> HentAlleRuter()
+        public async Task<ActionResult> HentMatchendeRuter(int id)
         {
-            try
+            List<Rute> alleMatchendeRuter = await _db.HentMatchendeRuter(id);
+            if(alleMatchendeRuter == null)
             {
-                List<Rute> alleRuter = await _db.Ruter.Select(r => new Rute
-                {
-                    Id = r.Id,
-                    FraDestinasjon = r.FraDestinasjon,
-                    TilDestinasjon = r.TilDestinasjon,
-                    PrisBarn = r.PrisBarn,
-                    PrisVoksen = r.PrisVoksen
-                }).ToListAsync();
-
-                return alleRuter;
+                _log.LogInformation("Fant ikke noen matchende ruter");
+                return NotFound("Fant ikke noen matchende ruter");
             }
-            catch
-            {
-                return null;
-            }
+            return Ok(alleMatchendeRuter);
         }
 
-        public async Task<List<Rute>> HentMatchendeRuter(int id)
+        public async Task<ActionResult> HentAvganger(int RuteId, DateTime Tid)
         {
-            var compareObjekt = await _db.Destinasjoner.FindAsync(id);
-
-            try
+            List<Avganger> matchendeAvganger = await _db.HentAvganger(RuteId, Tid);
+            if(matchendeAvganger == null)
             {
-                List<Rute> matchendeRuter = await _db.Ruter.Select(r => new Rute
-                {
-                    Id = r.Id,
-                    FraDestinasjon = r.FraDestinasjon,
-                    TilDestinasjon = r.TilDestinasjon,
-                    PrisBarn = r.PrisBarn,
-                    PrisVoksen = r.PrisVoksen
-                    
-                }).Where(r => r.Id == id)
-                .ToListAsync();
-
-                return matchendeRuter;
+                _log.LogInformation("Fant ingen matchende avganger");
+                return NotFound("Fant ingen matchende avganger");
             }
-            catch
-            {
-                return null;
-            }
+            return Ok(matchendeAvganger);
         }
-        public async Task<List<Avganger>> HentAvganger(int RuteId, DateTime Tid)
+        public async Task<ActionResult> HentAvgang(int id)
         {
-
-            Console.WriteLine(Tid.ToString());
-            try
+            Avganger avgang = await _db.HentAvgang(id);
+            if(avgang == null)
             {
-                
-                List<Avganger> avganger = await _db.Avganger.Select(a => new Avganger
-                {
-                    Id = a.Id,
-                    AvgangTid = a.AvgangTid,
-                    RuteNr = a.RuteNr
-                }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid.Date, Tid.Date) == 0)
-                .ToListAsync();
-                return avganger;
+                _log.LogInformation("Fant ikke avgang med id " + id);
+                return NotFound("Fant ikke avgang med id" + id);
             }
-            catch
-            {
-                //TODO send http error
-                return null;
-            }
-        }
-        public async Task<Avganger> HentAvgang(int id)
-        {
-            try
-            {
-                AvgangerTable enAvgang = await _db.Avganger.FindAsync(id);
-                Avganger avgang = new Avganger
-                {
-                    Id = enAvgang.Id,
-                    AvgangTid = enAvgang.AvgangTid,
-                    RuteNr = enAvgang.RuteNr                                      
-                };
-                return avgang;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-        public async Task<Avganger> HentEnAvgang(int id)
-        {
-            try
-            {
-                AvgangerTable enAvgang = await _db.Avganger.FindAsync(id);
-                var hentetAvgang = new Avganger()
-                {
-                    Id = enAvgang.Id,
-                    AvgangTid = enAvgang.AvgangTid,
-                    RuteNr = enAvgang.RuteNr,
-
-                };
-
-                return hentetAvgang;
-            }
-            catch
-            {
-                return null;
-            }
+            return Ok(avgang);
         }
     }
 }
