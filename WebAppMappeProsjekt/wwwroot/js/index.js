@@ -50,7 +50,7 @@ function visMatchendeRuter(matchendeRuter) {
     }
     ut += "</select><p class='error' id='ruteErrorLabel'></p>"
     let iDag = new Date().toISOString().substring(0, 16);
-    let datoFelt = "<input type='datetime-local' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' class='btn-search'>Finn reise</button>";
+    let datoFelt = "<input type='date' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' class='btn-search'>Finn reise</button>";
     $("#ruteVelger").html(ut)
     $("#tidspunktVelger").html(datoFelt);
 }
@@ -90,14 +90,20 @@ function formaterAvganger(avganger) {
         "<tr>" +
         "<th>Tid</th><th></th>" +
         "</tr>";
-    for (let avgang of avganger) {
-        ut += "<tr>" +
-            "<td>" + avgang.avgangTid + "</td>" +
-            "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
-            "</tr>";
+    if (avganger.length != 0) {
+        for (let avgang of avganger) {
+            ut += "<tr>" +
+                "<td>" + avgang.avgangTid + "</td>" +
+                "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
+                "</tr>";
+        }
+        ut += "</table>";
+        $("#ruteOutPut").html(ut);
     }
-    ut += "</table>";
-    $("#ruteOutPut").html(ut);
+    else {
+        $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
+    }
+    
 }
 
 

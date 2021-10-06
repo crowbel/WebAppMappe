@@ -31,12 +31,12 @@ function bestillingsVindu(avganger) {
         "<h1>Info</h1>" +
         "<form class='form'>" +
         "<div class='form-group'>" +
-        "<label>Antall Barn</label></br>" +
+        "<label>Antall Barn (" + avganger.ruteNr.prisBarn + " kr)</label></br > " +
         "<input type='number' class='form-control' id='antallBarn'onChange='resetErrors()'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
-        "<label>Antall Voksne</label></br>" +
+        "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
         "<label id='antallVoksneErr'></label></br>" +
         "<input type='number' class='form-control' id='antallVoksen'onChange='resetErrors()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
@@ -67,8 +67,8 @@ function bestillingsVindu(avganger) {
 
 
 function lagreBestilling() {
-    /*console.log(avganger.avgangTid);
-    $("#avgang").html(avganger.avgangTid);*/
+   // console.log(avganger.avgangTid);
+    //$("#avgang").html(avganger.avgangTid);
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
@@ -114,7 +114,7 @@ function resetErrors() {
 
 function hentBestilling(id) {
     $.get("Ordre/HentEn?id="+id, function (order) {
-        //formaterOrdre(order);
+        formaterOrdre(order);
         console.log(order.avgangNr);
 
     })
@@ -124,21 +124,28 @@ function hentBestilling(id) {
 }
 
 function formaterOrdre(order) {
+    
     let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
         "<table class='table table-striped' >" +
         "<tr>" +
-        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th>" +
+        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th><th>Sum</th>" +
         "</tr>";
     
     ut += "<tr>" +
         "<td>" + order.antallBarn + "</td>" +
         "<td>" + order.antallVoksen + "</td>" +
-        "<td>" + order.refPers + "</td>" +
-        "<td>" + order.avgangNr + "</td>" +
-        "<td>" + order.ruteNr + "</td>" +
-        "</tr>";
+        "<td>" + order.refPers + "</td>";
+        
+    
+    $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
+        let totalsum = (order.antallBarn * avgang.ruteNr.prisBarn) + (order.antallVoksen * avgang.ruteNr.prisVoksen);
+        ut += "<td>" + avgang.avgangTid + "</td>" +
+            "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
+            "<td>" + totalsum + " kr</td>";
+        ut += "</tr ></table>";
+        ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
+        $("#outputOmråde").html(ut);
+    });
 
-    ut += "</table>";
-    ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
-    $("#outputOmråde").html(ut);
+
 }
