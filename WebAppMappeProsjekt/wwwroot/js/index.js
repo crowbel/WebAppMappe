@@ -13,7 +13,7 @@ function hentAlleDestinasjoner() {
 
 function visDestinasjoner(destinasjoner) {
     let ut = "<select name='destinasjoner' class='selectDestinasjon' id='selectDestinasjon' onchange='hentRuterFor()'>" +
-        "<option disabled selected value=''>Velg destinasjon</option>";
+        "<option disabled selected value=''>Hvor vil du reise fra?</option>";
     for (let dest of destinasjoner) {
         ut += "<option value='" + dest.id + "'>" + dest.sted + "</option>";
     }
