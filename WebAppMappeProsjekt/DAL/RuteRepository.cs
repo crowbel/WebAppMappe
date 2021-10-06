@@ -44,7 +44,7 @@ namespace WebAppMappeProsjekt.DAL
                     PrisBarn = r.PrisBarn,
                     PrisVoksen = r.PrisVoksen
 
-                }).Where(r => r.Id == id)
+                }).Where(r => r.FraDestinasjon.Id==id)
                 .ToListAsync();
 
                 return matchendeRuter;
@@ -69,7 +69,7 @@ namespace WebAppMappeProsjekt.DAL
             }
             catch
             {
-                //TODO send http error
+                
                 return null;
             }
         }
