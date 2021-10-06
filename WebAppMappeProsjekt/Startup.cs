@@ -25,7 +25,7 @@ namespace WebAppMappeProsjekt
             services.AddControllers();
 
             services.AddDbContext<RuteContext>(options => options.UseSqlite("Data source=Rute.db"));
-            services.AddDbContext<OrdreContext>(options => options.UseSqlite("Data source=Ordre.db"));
+            //services.AddDbContext<OrdreContext>(options => options.UseSqlite("Data source=Ordre.db"));
 
             services.AddScoped<IOrdreRepository, OrdreRepository>();
             services.AddScoped<IRuteRepository, RuteRepository>();

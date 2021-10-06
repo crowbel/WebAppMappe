@@ -48,5 +48,15 @@ namespace WebAppMappeProsjekt.Controllers
             }
             return Ok(matchendeAvganger);
         }
+        public async Task<ActionResult> HentAvgang(int id)
+        {
+            Avganger avgang = await _db.HentAvgang(id);
+            if(avgang == null)
+            {
+                _log.LogInformation("Fant ikke avgang med id " + id);
+                return NotFound("Fant ikke avgang med id" + id);
+            }
+            return Ok(avgang);
+        }
     }
 }

@@ -63,13 +63,31 @@ namespace WebAppMappeProsjekt.DAL
                     Id = a.Id,
                     AvgangTid = a.AvgangTid,
                     RuteNr = a.RuteNr
-                }).Where(a => a.Id == RuteId && a.AvgangTid == Tid)
+                }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid.Date, Tid.Date) == 0)
                 .ToListAsync();
                 return avganger;
             }
             catch
             {
                 //TODO send http error
+                return null;
+            }
+        }
+        public async Task<Avganger> HentAvgang(int id)
+        {
+            try
+            {
+                AvgangerTable enAvgang = await _db.Avganger.FindAsync(id);
+                Avganger avgang = new Avganger
+                {
+                    Id = enAvgang.Id,
+                    AvgangTid = enAvgang.AvgangTid,
+                    RuteNr = enAvgang.RuteNr
+                };
+                return avgang;
+            }
+            catch
+            {
                 return null;
             }
         }

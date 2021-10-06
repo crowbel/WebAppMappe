@@ -6,7 +6,7 @@ namespace WebAppMappeProsjekt.DAL
 {
     public interface IOrdreRepository
     {
-        Task<bool> LagreOrdre(BillettOrdre innOrdre);
+        Task<int> LagreOrdre(BillettOrdre innOrdre);
         Task<List<BillettOrdre>> HentAlle();
         Task<BillettOrdre> HentEn(int id);
     }

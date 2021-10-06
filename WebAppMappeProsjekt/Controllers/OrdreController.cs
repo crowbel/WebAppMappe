@@ -21,13 +21,13 @@ namespace WebAppMappeProsjekt.Controllers
 
         public async Task<ActionResult> LagreOrdre(BillettOrdre innOrdre)
         {
-            bool returOk = await _db.LagreOrdre(innOrdre);
-            if (!returOk)
+            int lagretOrdre = await _db.LagreOrdre(innOrdre);
+            if (lagretOrdre < 1)
             {
                 _log.LogInformation("Ordre ble ikke lagret");
                 return BadRequest("Ordren ble ikke lagret");
             }
-            return Ok("Ordre ble lagret");
+            return Ok(lagretOrdre);
             
         }
 

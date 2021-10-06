@@ -24,6 +24,17 @@ namespace WebAppMappeProsjekt.Model
         public string Sted { get; set; }
         public string Land { get; set; }
     }
+    public class Ordrer
+    {
+        public int Id { get; set; }
+        public int AntallBarn { get; set; }
+        public int AntallVoksen { get; set; }
+        public string RefPers { get; set; }
+
+        virtual public AvgangerTable AvgangNr { get; set; }
+
+        virtual public Ruter RuteNr { get; set; }
+    }
     public class RuteContext : DbContext
     {
         public RuteContext(DbContextOptions<RuteContext> options) 
@@ -34,6 +45,7 @@ namespace WebAppMappeProsjekt.Model
         public DbSet<Ruter> Ruter { get; set; }
         public DbSet<AvgangerTable> Avganger { get; set; }
         public DbSet<Destinasjoner> Destinasjoner { get; set; }
+        public DbSet<Ordrer> Ordrer { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
