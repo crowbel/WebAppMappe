@@ -20,21 +20,19 @@
 
 .column .container {
     margin-top: 5%;
-    //margin-right: 30%;
     width:90%;  
 }
 
 .column {
     float:left;
     width: 50%;
-    //text-align:center;   
 }
 .error{
     color: red;
     text-align: center;
 }
 .select:invalid {
-    color: white;
+    color: #18306E;
     background-color: #18306E;
 }
 .container{
@@ -44,6 +42,7 @@
     width: 100%;
     height: 100px;
 }
+
 .ruteSelectionContainer {
     margin-top: 15px;
     width: 40%;
@@ -95,14 +94,55 @@
     border-radius: 10px;
 }
 
-@media only screen and (max-width: 1015px) {
-    .column{
-        width:100%;
+@media only screen and (max-width: 1215px) {
+    .column {
+        width: 100%;
     }
 
-    .column img{
-        height: 500px;
+        .column img {
+            height: 500px;
+        }
+
+    .ruteSelectionContainer {
+        margin-top: 15px;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .selectDestinasjon {
+        height: 90px;
+        font-size: 15pt;
+    }
+
+    .reiseSelect {
+        height: 90px;
+        font-size: 15pt;
+
     }
 }
+@media only screen and (max-width: 815px) {
+    .column {
+        width: 100%;
+    }
 
+        .column img {
+            height: 500px;
+        }
+
+    .ruteSelectionContainer {
+        margin-top: 15px;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .selectDestinasjon {
+        height: 120px;
+        font-size: 25pt;
+    }
+
+    .reiseSelect {
+        height: 120px;
+        font-size: 25pt;
+    }
+}
 
