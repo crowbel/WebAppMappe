@@ -106,7 +106,24 @@ namespace WebAppMappeProsjekt.Controllers
                 return null;
             }
         }
-
+        public async Task<Avganger> HentAvgang(int id)
+        {
+            try
+            {
+                AvgangerTable enAvgang = await _db.Avganger.FindAsync(id);
+                Avganger avgang = new Avganger
+                {
+                    Id = enAvgang.Id,
+                    AvgangTid = enAvgang.AvgangTid,
+                    RuteNr = enAvgang.RuteNr                                      
+                };
+                return avgang;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public async Task<Avganger> HentEnAvgang(int id)
         {
             try
