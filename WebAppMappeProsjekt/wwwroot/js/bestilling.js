@@ -112,6 +112,7 @@ function resetErrors() {
 
 
 
+
 function hentBestilling(id) {
     $.get("Ordre/HentEn?id=" + id, function (order) {
         formaterOrdre(order);
