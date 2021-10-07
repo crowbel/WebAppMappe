@@ -1,16 +1,6 @@
 ﻿body {
     background-color: #F7F3F2;
 }
-/*
-.dropdown {
-    padding: 5px;
-    border: 0px;
-    background-color: #E3F2FD;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-}
-*/
 
 .column img {
     //float: left;
@@ -27,17 +17,21 @@
     float:left;
     width: 50%;
 }
+
 .error{
     color: red;
     text-align: center;
 }
+
 .select:invalid {
     color: #18306E;
     background-color: #18306E;
 }
+
 .container{
 
 }
+
 .img-container {
     width: 100%;
     height: 100px;
@@ -48,6 +42,7 @@
     width: 40%;
     margin-left: 30%;
 }
+
 .selectDestinasjon {
     height: 55px;
     width: 100%;
@@ -61,20 +56,24 @@
     display: block;
     padding: 0;
 }
+
 .selectionInlineContainer {
     display: flex;
     width: 100%;
     margin: 0;
 }
+
 .selectionInline {
     display: block;
     margin: 0;
     width: 50%;
 }
+
 .reiseSelect {
     width: 100%;
     height: 70px;
 }
+
 .btn-default {
     background: #18306E;
     color: #fff;
@@ -84,6 +83,7 @@
     font-size: 12pt;
     border-radius: 10px;
 }
+
 .btn-search {
     background: #18306E;
     color: #fff;
@@ -99,9 +99,9 @@
         width: 100%;
     }
 
-        .column img {
-            height: 500px;
-        }
+    .column img {
+        height: 500px;
+    }
 
     .ruteSelectionContainer {
         margin-top: 15px;
@@ -120,14 +120,15 @@
 
     }
 }
+
 @media only screen and (max-width: 815px) {
     .column {
         width: 100%;
     }
 
-        .column img {
-            height: 500px;
-        }
+    .column img {
+        height: 500px;
+    }
 
     .ruteSelectionContainer {
         margin-top: 15px;
@@ -145,4 +146,3 @@
         font-size: 25pt;
     }
 }
-
