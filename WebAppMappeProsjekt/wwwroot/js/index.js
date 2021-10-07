@@ -57,7 +57,8 @@ function hentAvganger() {
         }).fail(function () {
             url = "rute/hentForsteAvgang?ruteid=" + id + "&tid=" + Tid.toJSON();
             $.get(url, function (avgang) {
-                formaterAvganger(avgang);
+                //formaterAvganger(avgang);
+                formaterForsteAvganger(avgang);
             }).fail(function () {
                 $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
             });
@@ -100,6 +101,30 @@ function formaterAvganger(avganger) {
             let avreiseTid = new Date(avgang.avgangTid);
             ut += "<tr>" +
                 "<td>" + avgang.ruteNr.fraDestinasjon.sted + '-' + avgang.ruteNr.tilDestinasjon.sted + "</td>"+
+                "<td>" + avreiseTid.toLocaleString() + "</td>" +
+                "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
+                "</tr>";
+        }
+        ut += "</table>";
+        $("#ruteSelectionContainer").html(ut);
+    }
+    else {
+        $("#serverErrorLabel").html("Det er dessverre ingen avganger tilgjengelig, velg et annet tidspunkt.")
+    }
+}
+
+function formaterForsteAvganger(avganger) {
+    let ut = "<h1>Velg avgang</h1></br>" +
+        "<p style='color:black'>Valgt dato var ikke tilgjengelig, her er nærmeste ledige avgang:</p>" +
+        "<table class= 'table table-striped' style='width: 600px;'" +
+        "<tr>" +
+        "<th>Din Rute</th><th>Tid</th><th></th>" +
+        "</tr>";
+    if (avganger.length != 0) {
+        for (let avgang of avganger) {
+            let avreiseTid = new Date(avgang.avgangTid);
+            ut += "<tr>" +
+                "<td>" + avgang.ruteNr.fraDestinasjon.sted + '-' + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
                 "<td>" + avreiseTid.toLocaleString() + "</td>" +
                 "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
                 "</tr>";
