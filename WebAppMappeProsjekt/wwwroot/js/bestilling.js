@@ -21,17 +21,17 @@ function bestillingsVindu(avganger) {
         "<form class='form'>" +
         "<div class='form-group'>" +
         "<label>Antall Barn (" + avganger.ruteNr.prisBarn + " kr)</label></br > " +
-        "<input type='number' class='form-control' id='antallBarn'onChange='resetErrors()'/>" +
+        "<input type='number' class='form-control' id='antallBarn'onChange='validerAntallBarn(this.value)'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
-        "<input type='number' class='form-control' id='antallVoksen'onChange='resetErrors()'/>" +
+        "<input type='number' class='form-control' id='antallVoksen'onChange='validerAntallVoksen(this.value)'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Fornavn og Etternavn</label></br>" +
-        "<input type='text' class='form-control' id='refPers'onChange='resetErrors()'/>" +
+        "<input type='text' class='form-control' id='refPers'onChange='validerNavn(this.value)'/>" +
         "<span id='feilRefPerson' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
@@ -41,13 +41,24 @@ function bestillingsVindu(avganger) {
         "<input type='hidden' id='ruteNr' value='" + avganger.ruteNr.id + "'/>" +
         "</div>" +
         "<div class='form-group'>" +
-        "<input type='button' id='lagre' value='Neste' onclick='lagreBestilling()' class='btn btn-default'/>" +
+        "<input type='button' id='lagre' value='Bestill' onclick='validerOgLagreBestilling()' class='btn btn-default'/>" +
         "</div>" +
         "</form>" +
         "</div>";
+
     $("#outputOmråde").html(ut);
 
     //Lagrer fra og til info midlertidig
+}
+
+function validerOgLagreBestilling() {
+    const antallBarnOK = validerAntallBarn($("#antallBarn").val());
+    const antallVoksenOK = validerAntallVoksen($("#antallVoksen").val());
+    const navnOK = validerNavn($("#refPers").val());
+
+    if (antallBarnOK && antallVoksenOK && navnOK) {
+        lagreBestilling();
+    }
 }
 
 
@@ -57,51 +68,22 @@ function lagreBestilling() {
 
     //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
 
-    if (validate()) {
-        const order = {
-            antallBarn: $("#antallBarn").val(),
-            antallVoksen: $("#antallVoksen").val(),
-            refPers: $("#refPers").val(),
-            avgangNr: $("#avgangNr").val(),
-            ruteNr: $("#ruteNr").val()
-        }
-        const url = "Ordre/LagreOrdre";
-        $.post(url, order, function (id) {
-            //hentBestilling(id);
-            window.location.href = 'bestilt.html?id='+ id;
+    
+    const order = {
+        antallBarn: $("#antallBarn").val(),
+        antallVoksen: $("#antallVoksen").val(),
+        refPers: $("#refPers").val(),
+        avgangNr: $("#avgangNr").val(),
+        ruteNr: $("#ruteNr").val()
+    }
+    const url = "Ordre/LagreOrdre";
+    $.post(url, order, function (id) {
+        window.location.href = 'bestilt.html?id='+ id;
 
-        }).fail(function () {
-            $("#error").html("Feil på server! Prøv igjen senere")
-        });
-    }
-}
-function validate() {
-    let gyldig = true;
-    let antallBarn = $("#antallBarn").val();
-    let antallVoksne = $("#antallVoksen").val();
-    let totalAntall = antallBarn + antallVoksne;
-    if (antallBarn < 1) {
-        gyldig = false;
-        $("#feilAntallBarn").html("Du kan ikke velge et negativt tall!");
-    }
-    if (antallVoksne < 1) {
-        gyldig = false;
-        $("#feilAntallVoksne").html("Du kan ikke velge et negativt tall!");
-    }
-    if (totalAntall < 1) {
-        gyldig = false;
-        $("#feilAntallVoksne").html("Billetten må gjelde minst 1 person!");
-    }
-    if (!$("#refPers").val()) {
-        gyldig = false;
-        $("#feilRefPerson").html("Du må oppgi et navn!");
-    }
-    return gyldig;
-}
-function resetErrors() {
-    $("#feilRefPerson").html("");
-    $("#feilAntallVoksne").html("");
-    $("#feilAntallBarn").html("");
+    }).fail(function () {
+        $("#error").html("Feil på server! Prøv igjen senere")
+    });
+    
 }
 
 
