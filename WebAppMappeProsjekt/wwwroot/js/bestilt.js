@@ -15,7 +15,8 @@ function hentBestilling() {
 
 function formaterOrdre(order) {
 
-    let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
+    let ut = "<h1 style='text-align:center'>Takk for din bestilling!</h1>";
+    ut += "<h4 style='text-align:center;margin-top:30px'>Kvittering</h4>" +
         "<table class='table table-striped' >" +
         "<tr>" +
         "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th><th>Sum</th>" +
@@ -34,9 +35,7 @@ function formaterOrdre(order) {
             "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
             "<td>" + totalsum + " kr</td>";
         ut += "</tr ></table>";
-        ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
         $("#outputOmråde").html(ut);
     });
-
 
 }
