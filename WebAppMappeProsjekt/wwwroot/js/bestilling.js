@@ -20,12 +20,12 @@ function bestillingsVindu(avganger) {
         "<form class='form'>" +
         "<div class='form-group'>" +
         "<label>Antall Barn (" + avganger.ruteNr.prisBarn + " kr)</label></br > " +
-        "<input type='number' value='0' class='form-control' id='antallBarn'onChange='validerAntallBarn(this.value)'/>" +
+        "<input type='number' value='0' class='form-control' id='antallBarn'onChange='validerAntallBarn(this.value); hentPris()'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
-        "<input type='number' value='0' class='form-control' id='antallVoksen'onChange='validerAntallVoksen(this.value)'/>" +
+        "<input type='number' value='0' class='form-control' id='antallVoksen'onChange='validerAntallVoksen(this.value);hentPris()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
@@ -39,6 +39,7 @@ function bestillingsVindu(avganger) {
         "<div class='form-group'>" +
         "<input type='hidden' id='ruteNr' value='" + avganger.ruteNr.id + "'/>" +
         "</div>" +
+        "<span id='pris'></span>" +
         "<div class='form-group'>" +
         "<input type='button' id='lagre' value='Bestill' onclick='validerOgLagreBestilling()' class='btn btn-default'/>" +
         "</div>" +
@@ -74,4 +75,32 @@ function lagreBestilling() {
     }).fail(function () {
         $("#error").html("Feil på server! Prøv igjen senere")
     });
+}
+
+function hentPris() {
+    const id = window.location.search.substring(1);
+    const url = "Rute/HentAvgang?" + id;
+    $.get(url, function (avganger) {
+        pris(avganger);
+
+    }).fail(function () {
+        $("#error").html("Feil på server! Prøv igjen senere")
+    });
+}
+
+function pris(avganger) {
+    let antallBarn = $("#antallBarn").val();
+    let antallVoksen = $("#antallVoksen").val();
+    let totalpris = (avganger.ruteNr.prisBarn * antallBarn) + (avganger.ruteNr.prisVoksen * antallVoksen);
+
+    if (antallBarn < 0 || antallVoksen < 0) {
+        let ut = "<h3>Totalpris: 0 </h3>";
+        $("#pris").html(ut);
+    }
+    else {
+        let ut = "<h3>Totalpris: " + totalpris + "</h3>";
+        $("#pris").html(ut);
+    }
+
+
 }
