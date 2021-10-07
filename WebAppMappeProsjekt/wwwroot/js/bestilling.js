@@ -13,7 +13,6 @@ function hentAvgang() {
     });
 }
 
-
 function bestillingsVindu(avganger) {
 
     let ut = "<div class='container'>" +
@@ -47,8 +46,6 @@ function bestillingsVindu(avganger) {
         "</div>";
 
     $("#outputOmråde").html(ut);
-
-    //Lagrer fra og til info midlertidig
 }
 
 function validerOgLagreBestilling() {
@@ -61,13 +58,7 @@ function validerOgLagreBestilling() {
     }
 }
 
-
 function lagreBestilling() {
-    // console.log(avganger.avgangTid);
-    //$("#avgang").html(avganger.avgangTid);
-
-    //Sjekker at informasjonen oppgitt i bestillingsvinduet er gyldig f.eks Simple RegEx
-
     
     const order = {
         antallBarn: $("#antallBarn").val(),
@@ -83,45 +74,4 @@ function lagreBestilling() {
     }).fail(function () {
         $("#error").html("Feil på server! Prøv igjen senere")
     });
-    
 }
-
-
-/*function hentBestilling(id) {
-    $.get("Ordre/HentEn?id=" + id, function (order) {
-        formaterOrdre(order);
-        console.log(order.avgangNr);
-
-    })
-        .fail(function () {
-            $("#feil").html("Feil på server - prøv igjen senere");
-        });
-}
-
-function formaterOrdre(order) {
-
-    let ut = "<h1 style='text-align:center'>Bestillingsoversikt</h1>" +
-        "<table class='table table-striped' >" +
-        "<tr>" +
-        "<th>Antall Barn</th><th>Antall Voksne</th><th>Navn</th><th>Avgang</th><th>Rute</th><th>Sum</th>" +
-        "</tr>";
-
-    ut += "<tr>" +
-        "<td>" + order.antallBarn + "</td>" +
-        "<td>" + order.antallVoksen + "</td>" +
-        "<td>" + order.refPers + "</td>";
-
-
-    $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
-        let avreiseTid = new Date(avgang.avgangTid);
-        let totalsum = (order.antallBarn * avgang.ruteNr.prisBarn) + (order.antallVoksen * avgang.ruteNr.prisVoksen);
-        ut += "<td>" + avreiseTid.toLocaleString() + "</td>" +
-            "<td>" + avgang.ruteNr.fraDestinasjon.sted + " til " + avgang.ruteNr.tilDestinasjon.sted + "</td>" +
-            "<td>" + totalsum + " kr</td>";
-        ut += "</tr ></table>";
-        ut += "<input type='button' id='checkout' Value='Bestill' onclick='bestill()' class='btn btn-default'/>";
-        $("#outputOmråde").html(ut);
-    });
-
-
-}*/

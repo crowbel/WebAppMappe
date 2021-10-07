@@ -13,7 +13,6 @@ namespace WebAppMappeProsjekt.DAL
         {
             _db = db;
         }
-
         public async Task<int> LagreOrdre(BillettOrdre innOrdre)
         {
             try
@@ -37,8 +36,6 @@ namespace WebAppMappeProsjekt.DAL
                 return -1;
             }
         }
-
-
         public async Task<List<BillettOrdre>> HentAlle()
         {
             try
@@ -62,7 +59,6 @@ namespace WebAppMappeProsjekt.DAL
                 return null;
             }
         }
-
         public async Task<BillettOrdre> HentEn(int id)
         {
             try

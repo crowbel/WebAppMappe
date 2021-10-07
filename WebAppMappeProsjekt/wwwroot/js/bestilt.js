@@ -27,7 +27,6 @@ function formaterOrdre(order) {
         "<td>" + order.antallVoksen + "</td>" +
         "<td>" + order.refPers + "</td>";
 
-
     $.get("rute/hentAvgang?id=" + order.avgangNr, function (avgang) {
         let avreiseTid = new Date(avgang.avgangTid);
         let totalsum = (order.antallBarn * avgang.ruteNr.prisBarn) + (order.antallVoksen * avgang.ruteNr.prisVoksen);
@@ -37,5 +36,4 @@ function formaterOrdre(order) {
         ut += "</tr ></table>";
         $("#outputOmråde").html(ut);
     });
-
 }

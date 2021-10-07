@@ -19,6 +19,7 @@ function visDestinasjoner(destinasjoner) {
     }
     $("#fraDestinasjonVelger").html(ut);
 }
+
 function hentRuterFor() {
 
     let id = $("#selectDestinasjon").find(":selected").val();
@@ -45,6 +46,7 @@ function visMatchendeRuter(matchendeRuter) {
     $("#tidspunktVelger").html(datoFelt);
     $("#knapp").html(knapp);
 }
+
 function hentAvganger() {
     if (validerRuteValg()) {
         let id = $("#selectRute").find(":selected").val();
@@ -58,6 +60,7 @@ function hentAvganger() {
         
     }
 }
+
 function validerRuteValg() {
     resetErrorLabels();
     let gyldig = true;
@@ -74,6 +77,7 @@ function validerRuteValg() {
     
     return gyldig;
 }
+
 function resetErrorLabels() {
     $("#ruteErrorLabel").html("");
     $("#datoErrorLabel").html("");
@@ -100,6 +104,5 @@ function formaterAvganger(avganger) {
     else {
         $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
     }
-
 }
 
