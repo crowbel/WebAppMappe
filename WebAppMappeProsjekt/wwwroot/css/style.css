@@ -13,8 +13,6 @@
 */
 
 .column img {
-    //float: left;
-    //width: 750px;
     height: 770px;
 }
 
@@ -40,13 +38,16 @@
 }
 .img-container {
     width: 100%;
-    height: 100px;
+    height: auto;
+
 }
 
 .ruteSelectionContainer {
-    margin-top: 15px;
+    margin-top: -55px;
     width: 40%;
     margin-left: 30%;
+    display:block;
+    color: white;
 }
 .selectDestinasjon {
     height: 55px;
@@ -93,6 +94,11 @@
     font-size: 16pt;
     border-radius: 10px;
 }
+#image_top {
+    max-width: 100%;
+    display: block;
+    overflow: hidden;
+}
 
 @media only screen and (max-width: 1215px) {
     .column {
@@ -104,7 +110,7 @@
         }
 
     .ruteSelectionContainer {
-        margin-top: 15px;
+        margin-top: -55px;
         width: 80%;
         margin-left: 10%;
     }
@@ -130,7 +136,7 @@
         }
 
     .ruteSelectionContainer {
-        margin-top: 15px;
+        margin-top: -55px;
         width: 80%;
         margin-left: 10%;
     }

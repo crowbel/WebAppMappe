@@ -80,7 +80,7 @@ function resetErrorLabels() {
 }
 
 function formaterAvganger(avganger) {
-    let ut ="<h1 style='margin-top:65%; text-align:center;'>Velg avgang</h1></br>"+
+    let ut ="<h1>Velg avgang</h1></br>"+
         "<table class= 'table table-striped' style='width: 600px;'" +
         "<tr>" +
         "<th>Din Rute</th><th>Tid</th><th></th>" +
