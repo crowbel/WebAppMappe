@@ -20,12 +20,12 @@ function bestillingsVindu(avganger) {
         "<form class='form'>" +
         "<div class='form-group'>" +
         "<label>Antall Barn (" + avganger.ruteNr.prisBarn + " kr)</label></br > " +
-        "<input type='number' value='0' class='form-control' id='antallBarn'onChange='validerAntallBarn(this.value); hentPris()'/>" +
+        "<input type='number' value='0' min='0' class='form-control' id='antallBarn'onChange='validerAntallBarn(this.value); hentPris()'/>" +
         "<span id='feilAntallBarn' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
         "<label>Antall Voksne (" + avganger.ruteNr.prisVoksen + " kr)</label></br>" +
-        "<input type='number' value='0' class='form-control' id='antallVoksen'onChange='validerAntallVoksen(this.value);hentPris()'/>" +
+        "<input type='number' value='0' min='0' class='form-control' id='antallVoksen'onChange='validerAntallVoksen(this.value);hentPris()'/>" +
         "<span id='feilAntallVoksne' style='color: red'></span>" +
         "</div>" +
         "<div class='form-group'>" +
