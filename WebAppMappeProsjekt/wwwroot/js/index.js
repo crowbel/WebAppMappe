@@ -55,7 +55,13 @@ function hentAvganger() {
         $.get(url, function (avganger) {
             formaterAvganger(avganger);
         }).fail(function () {
-            $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
+            url = "rute/hentForsteAvgang?ruteid=" + id + "&tid=" + Tid.toJSON();
+            $.get(url, function (avgang) {
+                formaterAvganger(avgang);
+            }).fail(function () {
+                $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
+            });
+            
         });
         
     }

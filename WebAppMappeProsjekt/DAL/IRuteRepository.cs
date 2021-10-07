@@ -11,6 +11,7 @@ namespace WebAppMappeProsjekt.DAL
     {
         Task<List<Destinasjon>> HentAlleDestinasjoner();
         Task<List<Rute>> HentMatchendeRuter(int id);
+        Task<List<Avganger>> HentForsteAvgang(int RuteId, DateTime Tid);
         Task<List<Avganger>> HentAvganger(int RuteId, DateTime Tid);
         Task<Avganger> HentAvgang(int id);
     }
