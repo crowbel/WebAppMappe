@@ -85,7 +85,11 @@ namespace WebAppMappeProsjekt.DAL
                   RuteNr = a.RuteNr
                  }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid.Date, Tid.Date) > 0)
                  .FirstOrDefaultAsync();
-                avganger.Add(avgang);
+                if(avgang != null)
+                {
+                    avganger.Add(avgang);
+                }
+                
             return avganger;
             }
             catch

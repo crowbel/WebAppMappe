@@ -108,7 +108,7 @@ function formaterAvganger(avganger) {
         $("#ruteSelectionContainer").html(ut);
     }
     else {
-        $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
+        $("#serverErrorLabel").html("Det er dessverre ingen avganger tilgjengelig, velg et annet tidspunkt.")
     }
 }
 
