@@ -46,12 +46,21 @@ namespace WebAppMappeProsjekt.Controllers
         public async Task<ActionResult> HentAvganger(int RuteId, DateTime Tid)
         {
             List<Avganger> matchendeAvganger = await _db.HentAvganger(RuteId, Tid);
-            if(matchendeAvganger == null)
+            if(matchendeAvganger == null || matchendeAvganger.Count < 1)
             {
                 _log.LogInformation("Fant ingen matchende avganger");
                 return NotFound("Fant ingen matchende avganger");
             }
             return Ok(matchendeAvganger);
+        }
+        public async Task<ActionResult> HentForsteAvgang(int RuteId, DateTime Tid)
+        {
+            List<Avganger> avgang = await _db.HentForsteAvgang(RuteId, Tid);
+            if(avgang == null)
+            {
+                return NotFound("Fant ingen avganger for denne ruten!");
+            }
+            return Ok(avgang);
         }
         public async Task<ActionResult> HentAvgang(int id)
         {

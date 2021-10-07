@@ -55,7 +55,13 @@ function hentAvganger() {
         $.get(url, function (avganger) {
             formaterAvganger(avganger);
         }).fail(function () {
-            $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
+            url = "rute/hentForsteAvgang?ruteid=" + id + "&tid=" + Tid.toJSON();
+            $.get(url, function (avgang) {
+                formaterAvganger(avgang);
+            }).fail(function () {
+                $("#serverErrorLabel").html("Feil på server! Prøv igjen senere");
+            });
+            
         });
         
     }
@@ -102,7 +108,7 @@ function formaterAvganger(avganger) {
         $("#ruteSelectionContainer").html(ut);
     }
     else {
-        $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
+        $("#serverErrorLabel").html("Det er dessverre ingen avganger tilgjengelig, velg et annet tidspunkt.")
     }
 }
 

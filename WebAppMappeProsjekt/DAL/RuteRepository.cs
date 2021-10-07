@@ -73,6 +73,31 @@ namespace WebAppMappeProsjekt.DAL
                 return null;
             }
         }
+        public async Task<List<Avganger>> HentForsteAvgang(int RuteId, DateTime Tid)
+        {
+            List<Avganger> avganger = new List<Avganger>();
+            try
+            {
+            Avganger avgang = await _db.Avganger.Select(a => new Avganger
+                {
+                  Id = a.Id,
+                  AvgangTid = a.AvgangTid,
+                  RuteNr = a.RuteNr
+                 }).Where(a => a.RuteNr.Id == RuteId && DateTime.Compare(a.AvgangTid.Date, Tid.Date) > 0)
+                 .FirstOrDefaultAsync();
+                if(avgang != null)
+                {
+                    avganger.Add(avgang);
+                }
+                
+            return avganger;
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
         public async Task<Avganger> HentAvgang(int id)
         {
             try
