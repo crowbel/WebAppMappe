@@ -19,17 +19,6 @@ function visDestinasjoner(destinasjoner) {
     }
     $("#fraDestinasjonVelger").html(ut);
 }
-
-
-function hentAlleRuter() {
-    let url = "rute/hentAlleRuter";
-    $.get(url, function (alleRuter) {
-        visRuter(alleRuter);
-    });
-    //Brukes denne?
-}
-
-
 function hentRuterFor() {
 
     let id = $("#selectDestinasjon").find(":selected").val();
@@ -50,9 +39,11 @@ function visMatchendeRuter(matchendeRuter) {
     }
     ut += "</select><p class='error' id='ruteErrorLabel'></p>"
     let iDag = new Date().toISOString().substring(0, 16);
-    let datoFelt = "<input type='date' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p> <button onclick='hentAvganger()' class='btn-search'>Finn reise</button>";
+    let datoFelt = "<input type='date' id='avreiseTid' min='" + iDag + "' class='reiseSelect'><p class='error' id='datoErrorLabel'></p>";
+    let knapp="<button onclick='hentAvganger()' class='btn-search'>Finn reise</button>";
     $("#ruteVelger").html(ut)
     $("#tidspunktVelger").html(datoFelt);
+    $("#knapp").html(knapp);
 }
 function hentAvganger() {
     if (validerRuteValg()) {
@@ -89,23 +80,25 @@ function resetErrorLabels() {
 }
 
 function formaterAvganger(avganger) {
-    let ut = "<table class= 'table table-striped' style='width: 600px;'" +
+    let ut ="<h1 style='margin-top:65%; text-align:center;'>Velg avgang</h1></br>"+
+        "<table class= 'table table-striped' style='width: 600px;'" +
         "<tr>" +
-        "<th>Tid</th><th></th>" +
+        "<th>Din Rute</th><th>Tid</th><th></th>" +
         "</tr>";
     if (avganger.length != 0) {
         for (let avgang of avganger) {
             let avreiseTid = new Date(avgang.avgangTid);
             ut += "<tr>" +
+                "<td>" + avgang.ruteNr.fraDestinasjon.sted + '-' + avgang.ruteNr.tilDestinasjon.sted + "</td>"+
                 "<td>" + avreiseTid.toLocaleString() + "</td>" +
                 "<td> <a class='btn btn-default' href='bestilling.html?id=" + avgang.id + "'>Velg</a> </td>" +
                 "</tr>";
         }
         ut += "</table>";
-        $("#ruteOutPut").html(ut);
+        $("#ruteSelectionContainer").html(ut);
     }
     else {
-        $("#ruteOutPut").html("<p style='margin-top:30px'>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
+        $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
     }
 
 }
