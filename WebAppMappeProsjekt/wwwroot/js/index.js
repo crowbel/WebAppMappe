@@ -19,17 +19,6 @@ function visDestinasjoner(destinasjoner) {
     }
     $("#fraDestinasjonVelger").html(ut);
 }
-
-
-function hentAlleRuter() {
-    let url = "rute/hentAlleRuter";
-    $.get(url, function (alleRuter) {
-        visRuter(alleRuter);
-    });
-    //Brukes denne?
-}
-
-
 function hentRuterFor() {
 
     let id = $("#selectDestinasjon").find(":selected").val();
