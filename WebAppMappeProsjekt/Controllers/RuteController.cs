@@ -24,6 +24,11 @@ namespace WebAppMappeProsjekt.Controllers
         public async Task<ActionResult> HentAlleDestinasjoner()
         {
             List<Destinasjon> alleDestinasjoner = await _db.HentAlleDestinasjoner();
+            if(alleDestinasjoner == null)
+            {
+                _log.LogInformation("Databasen for Destinasjoner er tom!");
+                return NotFound("Feil i database! Prøv igjen senere");
+            }
             return Ok(alleDestinasjoner);
         }
 

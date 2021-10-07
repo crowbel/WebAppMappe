@@ -20,16 +20,6 @@ function visDestinasjoner(destinasjoner) {
     $("#fraDestinasjonVelger").html(ut);
 }
 
-
-function hentAlleRuter() {
-    let url = "rute/hentAlleRuter";
-    $.get(url, function (alleRuter) {
-        visRuter(alleRuter);
-    });
-    //Brukes denne?
-}
-
-
 function hentRuterFor() {
 
     let id = $("#selectDestinasjon").find(":selected").val();
@@ -56,6 +46,7 @@ function visMatchendeRuter(matchendeRuter) {
     $("#tidspunktVelger").html(datoFelt);
     $("#knapp").html(knapp);
 }
+
 function hentAvganger() {
     if (validerRuteValg()) {
         let id = $("#selectRute").find(":selected").val();
@@ -69,6 +60,7 @@ function hentAvganger() {
         
     }
 }
+
 function validerRuteValg() {
     resetErrorLabels();
     let gyldig = true;
@@ -85,13 +77,14 @@ function validerRuteValg() {
     
     return gyldig;
 }
+
 function resetErrorLabels() {
     $("#ruteErrorLabel").html("");
     $("#datoErrorLabel").html("");
 }
 
 function formaterAvganger(avganger) {
-    let ut ="<h1 style='margin-top:65%; text-align:center;'>Velg avgang</h1></br>"+
+    let ut ="<h1>Velg avgang</h1></br>"+
         "<table class= 'table table-striped' style='width: 600px;'" +
         "<tr>" +
         "<th>Din Rute</th><th>Tid</th><th></th>" +
@@ -111,6 +104,5 @@ function formaterAvganger(avganger) {
     else {
         $("#ruteOutPut").html("<p>Det er dessverre ingen avganger denne dagen, velg et annet tidspunkt.</p>")
     }
-
 }
 

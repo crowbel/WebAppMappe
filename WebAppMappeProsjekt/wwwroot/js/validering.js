@@ -22,7 +22,6 @@ function validerAntallVoksen(antallVoksen) {
     }
 }
 
-
 function validerNavn(navn) {
     const regexp = /^[a-zA-ZæøåÆØÅ\.\ \-]{2,30}$/;
     const ok = regexp.test(navn);

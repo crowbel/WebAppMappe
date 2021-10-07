@@ -67,7 +67,6 @@ namespace WebAppMappeProsjekt.Model
                 context.Avganger.Add(avgang9);
 
                 context.SaveChanges();
-
             }
         }
     }
