@@ -13,7 +13,7 @@
 function validerAntallVoksen(antallVoksen) {
     const regexp = /^[0-9]{1,100}$/;
     const ok = regexp.test(antallVoksen);
-    if (!ok) {
+    if (!ok || antallVoksen < 1) {
         $("#feilAntallVoksne").html("Ugyldig tall!");
         return false;
     } else {
